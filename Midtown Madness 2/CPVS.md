@@ -73,28 +73,30 @@ repeats the process.
 
 A run-length decoder can look something like this:
 
-`char buf[bufSize];`
-`int bufPos = 0;`
-`int i;`
-`while (bufPos < listLen)`
-`{`
-`    char n = read();`
-`    if (n &0x7f == 0)`
-`    {`
-`        char c = read();`
-`        for (i = 0; i < n + 1 & 0x7f; i++)`
-`        {`
-`            buf[bufPos++] = c;`
-`        }`
-`    }`
-`    else`
-`    {`
-`        for (i = 0; i < n + 1; i++)`
-`        {`
-`            buf[bufPos++] = read();`
-`        }`
-`    }`
-`}`
+```
+char buf[bufSize];
+int bufPos = 0;
+int i;
+while (bufPos < listLen)
+{
+    char n = read();
+    if (n &0x7f == 0)
+    {
+        char c = read();
+        for (i = 0; i < n + 1 & 0x7f; i++)
+        {
+            buf[bufPos++] = c;
+        }
+    }
+    else
+    {
+        for (i = 0; i < n + 1; i++)
+        {
+            buf[bufPos++] = read();
+        }
+    }
+}
+```
 
 Where *bufSize* is large enough to hold the decompressed data and
 *listLen* is the compressed length of the list.
