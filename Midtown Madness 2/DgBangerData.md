@@ -58,7 +58,7 @@ file, in that case the values from *default.dgBangerData* is used.
 | NumParts      | int               | Number of breakable parts in the object                                                                                                                                           |
 | BirthRule     | block             | Particle effect for collision, see below                                                                                                                                          |
 | TexNumber     | int               | Number of the particle texture map, see below                                                                                                                                     |
-| BillFlags     | int               | Flags controlling *billboarding*, 0, 64, 128 and 512 are used in MM2 files for unknown effects                                                                                    |
+| BillFlags     | int               | Flags, 512=Unlit, others unknwon at this time                                                     |
 | YRadius       | float             | Bounding cylinder/sphere radius                                                                                                                                                   |
 | ColliderId    | int               | Index in a list of sound effects the object makes when collided with. The list is defined in the file [/aud/cardata/player/default_impacts.csv](default_impacts.csv "wikilink"). |
 | CollisionPrim | int               | Defines the type of object used for collision detection, 0=boundary file, 1=bounding box, 2=cylinder with circular base, height is Y-component of *Size* and 3=sphere             |
