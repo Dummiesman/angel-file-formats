@@ -62,5 +62,5 @@ of consequtive frames in the image, but the image may contain other
 frames for different particle effects.
 
 Oject collision particle effects may use other images, see *TexNumber*
-in [dgBangerData](dgBangerData.md "wikilink"), but these are structured in
+in [dgBangerData](DgBangerData.md "wikilink"), but these are structured in
 the same way, with frames and indices to the frames.
