@@ -31,9 +31,9 @@ This block can contain several tag-value parameters:
 | MassVar       | float             | Variance in particle mass                                                            |
 | Radius        | float             | Size of the invisible sphere containing all particles                                |
 | RadiusVar     | float             | Variance in containing sphere                                                        |
-| Drag          | float             | Unknown                                                                              |
+| Drag          | float             | Velocity reduction over time                                                                              |
 | DragVar       | float             | Variance in drag                                                                     |
-| Damp          | float             | Unknown                                                                              |
+| Damp          | float             | Percentage of retained velocity on collision.                                                                              |
 | DampVar       | float             | Variance in damp                                                                     |
 | DRadius       | float             | Size of the particles                                                                |
 | DRadiusVar    | float             | Variance in particle size                                                            |
@@ -47,16 +47,14 @@ This block can contain several tag-value parameters:
 | Gravity       | float             | Gravitational factor for particles, for Earth conditions enter -9.8 or thereabaouts  |
 | TexFrameStart | int               | Index of the first frame of particle animation in the image, see below               |
 | TexFrameEnd   | int               | Index of the last frame of particle animation in the image , see below               |
-| BirthFlags    | int               | Unknown                                                                              |
+| BirthFlags    | int               | Particle flags. 2 = Collision, 4 = Animated, 8 = KillOnCollision, 16 = Animated (cyle from start-end frame rapidly). Can be combined.                                                                              |
 | Height        | float             | Unknown                                                                              |
 | Intensity     | float             | Unknown                                                                              |
 | Color         | int               | Controls colour of the particles in some mysterious way that only Stereo understands |
 
 Tags of the asBirthRule block
 
-Some of the global particle effects use the texture image named "TODO: I
-could have sworn that I saw an image where the indices matched all of
-the default vehicular particle effect, now I can't find it". This image,
+Some of the global particle effects use the texture image named `ptx_wheel`. This image,
 and all particle texture images, are divided into rectangular frames
 used for animation. All frames are equal in size and they are numbered
 for easy access in the asBirthRule. Animation sequences must be made up
@@ -64,5 +62,5 @@ of consequtive frames in the image, but the image may contain other
 frames for different particle effects.
 
 Oject collision particle effects may use other images, see *TexNumber*
-in [dgBangerData](dgBangerData "wikilink"), but these are structured in
+in [dgBangerData](dgBangerData.md "wikilink"), but these are structured in
 the same way, with frames and indices to the frames.
