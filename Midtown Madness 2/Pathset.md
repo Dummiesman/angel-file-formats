@@ -25,30 +25,32 @@ props list)
 
 ## Structure
 
-`struct Pathset`
-`{`
-`    char[4] id = "PTH1";`
-`    ulong nPaths;    // Number of paths in this pathset`
-`    ulong unknown0;`
-`    struct Path paths[nPaths];`
-`}`
+```
+struct Pathset
+{
+    char[4] id = "PTH1";
+    ulong nPaths;    // Number of paths in this pathset
+    ulong unknown0;
+    struct Path paths[nPaths];
+}
 
-`struct Path`
-`{`
-`    char[32] name;    // Name of object or texture, padded with 0x00`
-`    ulong nPoints;    // Number of points in this path`
-`    ulong unknown1;`
-`    struct Point points[nPoints];`
-`    uchar type;       // See definition below`
-`    uchar spacing;    // Spacing of props placed between the points in`
-`                      // units of 1/4 metres (spacing = (ulong)(metres * 4))`
-`    ushort unknown3;`
-`}`
+struct Path
+{
+    char[32] name;    // Name of object or texture, padded with 0x00
+    ulong nPoints;    // Number of points in this path
+    ulong unknown1;
+    struct Point points[nPoints];
+    uchar type;       // See definition below
+    uchar spacing;    // Spacing of props placed between the points in
+                      // units of 1/4 metres (spacing = (ulong)(metres * 4))
+    ushort unknown3;
+}
 
-`struct Point`
-`{`
-`    ulong unknown2;`
-`    float x;`
-`    float y;`
-`    float z;`
-`}`
+struct Point
+{
+    ulong unknown2;
+    float x;
+    float y;
+    float z;
+}
+```
