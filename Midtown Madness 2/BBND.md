@@ -1,5 +1,5 @@
-BBND is a binary version of the [ASCII-based](BND "wikilink") format
-used to define the boundary of [PKG](PKG "wikilink") objects.
+BBND is a binary version of the [ASCII-based](BND.md "wikilink") format
+used to define the boundary of [PKG](PKG.md "wikilink") objects.
 
 ```
 struct BBND
