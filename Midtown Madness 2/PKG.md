@@ -93,7 +93,8 @@ struct PKGFileData
     long fvf;          // Flags defining what components are provided with
                        // each vertex, see below
     PKGSection[nSections] sections;
-}```
+}
+```
 
 ```
 struct PKGSection
