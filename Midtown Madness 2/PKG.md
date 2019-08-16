@@ -101,12 +101,14 @@ struct PKGSection
     ushort nStrips;       // Number of geometry strips in this section
     ushort flags;         // Unknown flags (Always 0 in MM2 PKGs)
 
-    long shaderOffset;    // Offset into the shader list of the requested
+    long shaderOffset;    // Offset into the shader list of the requested
                           // paintjob
     PKGStrip[nStrips] strips;
-}```
+}
+```
 
-```struct PKGStrip
+```
+struct PKGStrip
 {
     long primType;          // Determines the primitive type
     long nVertices;         // Number of vertices in this strip
@@ -126,7 +128,7 @@ struct PKGVertex
 ```
 
 ```
-struct Vertex3D`
+struct Vertex3D
 {
     float x;
     float y;
@@ -134,7 +136,8 @@ struct Vertex3D`
 }
 ```
 
-```struct Vector3D
+```
+struct Vector3D
 {
     float x;
     float y;
@@ -142,7 +145,8 @@ struct Vertex3D`
 }
 ```
 
-```struct Vertex2D
+```
+struct Vertex2D
 {
     float x;
     float y;
@@ -170,59 +174,71 @@ that the indices make up lists of complete, separate triangles.
 
 #### Shaders
 
-`PKGFileData`
-`{`
-`    long shaderType; // Bit 7: Shader type`
-`                     // Bit 0-6: Number of paint jobs`
-`    long shadersPerPaintJob;`
-`    PKGShader[Number of paint jobs * shadersPerPaintJob] shaders;`
-`}`
+```
+PKGFileData
+{
+    long shaderType; // Bit 7: Shader type
+                     // Bit 0-6: Number of paint jobs
+    long shadersPerPaintJob;
+    PKGShader[Number of paint jobs * shadersPerPaintJob] shaders;
+}
+```
 
-`union PKGShader`
-`{`
-`    PKGFullShader fullShader; // If type is 0`
-`    PKGLightShader lightShader; // If type is 1`
-`}`
+```
+union PKGShader
+{
+    PKGFullShader fullShader; // If type is 0
+    PKGLightShader lightShader; // If type is 1
+}
+```
 
 **NOTE:** The original format for shaders was *wrong*\! Diffuse and
 Ambient were reversed, and Emissive was incorrectly named Reflective.
 The shader names have also been updated to try and better reflect their
 uses.
 
-`PKGFullShader`
-`{`
-`    String  textureName;`
-`    Color4f diffuse;`
-`    Color4f ambient;`
-`    Color4f specular;`
-`    Color4f emissive;`
-`    float   shininess; // Intensity of specular highlights`
-`}`
+```
+PKGFullShader
+{
+    String  textureName;
+    Color4f diffuse;
+    Color4f ambient;
+    Color4f specular;
+    Color4f emissive;
+    float   shininess; // Intensity of specular highlights
+}
+```
 
-`PKGLightShader`
-`{`
-`    String  textureName;`
-`    Color4d diffuse;`
-`    Color4d ambient;`
-`    Color4d emissive;`
-`    float   shininess; // Intensity of specular highlights`
-`}`
+```
+PKGLightShader
+{
+    String  textureName;
+    Color4d diffuse;
+    Color4d ambient;
+    Color4d emissive;
+    float   shininess; // Intensity of specular highlights
+}
+```
 
-`Color4f`
-`{`
-`    float red;`
-`    float green;`
-`    float blue;`
-`    float alpha;`
-`}`
+```
+Color4f
+{
+    float red;
+    float green;
+    float blue;
+    float alpha;
+}
+```
 
-`Color4d`
-`{`
-`    unsigned char red;`
-`    unsigned char green;`
-`    unsigned char blue;`
-`    unsigned char alpha;`
-`}`
+```
+Color4d
+{
+    unsigned char red;
+    unsigned char green;
+    unsigned char blue;
+    unsigned char alpha;
+}
+```
 
 #### Offset
 
