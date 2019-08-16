@@ -34,101 +34,120 @@ MM2 can read two types of PKG files, PKG2 and PKG3, these differ
 slightly in the structure. The following C-style format description
 describes this using a *union* type.
 
-`struct PKG`
-`{`
-`    char[4]   header = "PKG3" | "PKG2";`
-`    PKGFile[] files;`
-`}`
+```
+struct PKG
+{
+    char[4]   header = "PKG3" | "PKG2";
+    PKGFile[] files;
+}
+```
 
-`union PKGFile`
-`{`
-`    PKG2File pkg2file; // If header == "PKG2"`
-`    PKG3File pkg3file; // If header == "PKG3"`
-`}`
+```
+union PKGFile
+{
+    PKG2File pkg2file; // If header == "PKG2"
+    PKG3File pkg3file; // If header == "PKG3"
+}
+```
 
-`struct PKG2File`
-`{`
-`    char[4]     header = "FILE";`
-`    String      name;   // Name of this section`
-`    PKGFileData data;   // Format depends of name, see below`
-`}`
+```
+struct PKG2File
+{
+    char[4]     header = "FILE";
+    String      name;   // Name of this section
+    PKGFileData data;   // Format depends of name, see below
+}
+```
 
-`struct PKG3File`
-`{`
-`    char[4]     header = "FILE";`
-`    String      name;   // Name of this section`
-`    long        length; // Length of this PKGFile in bytes`
-`    PKGFileData data;   // Format depends of name, see below`
-`}`
+```
+struct PKG3File
+{
+    char[4]     header = "FILE";
+    String      name;   // Name of this section
+    long        length; // Length of this PKGFile in bytes
+    PKGFileData data;   // Format depends of name, see below
+}
+```
 
-`struct String`
-`{`
-`    unsigned byte    length;     // Number of bytes in this string including`
-`                                 // the string terminator.`
-`    char[length - 1] characters; // ASCII characters`
-`    char             terminator = '\0';`
-`}`
+```
+struct String
+{
+    unsigned byte    length;     // Number of bytes in this string including
+                                 // the string terminator.
+    char[length - 1] characters; // ASCII characters
+    char             terminator = '\0';
+}
+```
 
 #### Geometry file
 
-`struct PKGFileData`
-`{`
-`    long nSections;    // Number of sections making up this LOD`
-`    long nVerticesTot; // Total number of vertices in this LOD`
-`    long nIndiciesTot; // Total number of indicies in this LOD`
-`    long nSections2;   // Repetition of the number of sections?`
-`                       // Highly unlikely, but I have no better suggestion at`
-`                       // this time`
-`    long fvf;          // Flags defining what components are provided with`
-`                       // each vertex, see below`
-`    PKGSection[nSections] sections;`
-`}`
+```
+struct PKGFileData
+{
+    long nSections;    // Number of sections making up this LOD
+    long nVerticesTot; // Total number of vertices in this LOD
+    long nIndiciesTot; // Total number of indicies in this LOD
+    long nSections2;   // Repetition of the number of sections?
+                       // Highly unlikely, but I have no better suggestion at
+                       // this time
+    long fvf;          // Flags defining what components are provided with
+                       // each vertex, see below
+    PKGSection[nSections] sections;
+}```
 
-`struct PKGSection`
-`{`
-`    ushort nStrips;       // Number of geometry strips in this section`
-`    ushort flags;         // Unknown flags (Always 0 in MM2 PKGs)`
+```
+struct PKGSection
+{
+    ushort nStrips;       // Number of geometry strips in this section
+    ushort flags;         // Unknown flags (Always 0 in MM2 PKGs)
 
-`    long shaderOffset;    // Offset into the shader list of the requested`
-`                          // paintjob`
-`    PKGStrip[nStrips] strips;`
-`}`
+    long shaderOffset;    // Offset into the shader list of the requested
+                          // paintjob
+    PKGStrip[nStrips] strips;
+}```
 
-`struct PKGStrip`
-`{`
-`    long primType;          // Determines the primitive type`
-`    long nVertices;         // Number of vertices in this strip`
-`    PKGVertex[nVertices] vertices;`
-`    long nIndices;          // Number of indices making up the geometry strip`
-`    ushort[nIndices] indices;`
-`}`
+```struct PKGStrip
+{
+    long primType;          // Determines the primitive type
+    long nVertices;         // Number of vertices in this strip
+    PKGVertex[nVertices] vertices;
+    long nIndices;          // Number of indices making up the geometry strip
+    ushort[nIndices] indices;
+}
+```
 
-`struct PKGVertex`
-`{`
-`    Vertex3D coordinate;         // If flags indicate coordinates`
-`    Vector3D normal;             // If flags indicate normals`
-`    Vertex2D textureCoordinate;  // If flags indicate texture coordinates`
-`}`
+```
+struct PKGVertex
+{
+    Vertex3D coordinate;         // If flags indicate coordinates
+    Vector3D normal;             // If flags indicate normals
+    Vertex2D textureCoordinate;  // If flags indicate texture coordinates
+}
+```
 
-`struct Vertex3D`
-`{`
-`    float x;`
-`    float y;`
-`    float z;`
-`}`
+```
+struct Vertex3D`
+{
+    float x;
+    float y;
+    float z;
+}
+```
 
-`struct Vector3D`
-`{`
-`    float x;`
-`    float y;`
-`    float z;`
-`}`
+```struct Vector3D
+{
+    float x;
+    float y;
+    float z;
+}
+```
 
-`struct Vertex2D`
-`{`
-`    float x;`
-`    float y;`
-`}`
+```struct Vertex2D
+{
+    float x;
+    float y;
+}
+```
 
 The bits of the PKGFILEData.fvf field are defined by the DirectX
 flexible vertex format enumerated type. Some of the bits are as follows:
@@ -207,28 +226,34 @@ uses.
 
 #### Offset
 
-`PKGFileData`
-`{`
-`    Vector3D offset; // Have not tested, but could be an offset added to all`
-`                     // vertices in the object`
-`}`
+```
+PKGFileData
+{
+    Vector3D offset; // Have not tested, but could be an offset added to all
+                     // vertices in the object
+}
+```
 
 #### XRef
 
-`PKGFileData`
-`{`
-`    long                 nReferences;`
-`    PKGXRef[nReferences] references;`
-`}`
+```
+PKGFileData
+{
+    long                 nReferences;
+    PKGXRef[nReferences] references;
+}
+```
 
-`PKGXRef`
-`{`
-`    Vector3D xAxis;`
-`    Vector3D yAxis;`
-`    Vector3D zAxis;`
-`    Vector3D origin;`
-`    char[32] name;`
-`}`
+```
+PKGXRef
+{`
+    Vector3D xAxis;
+    Vector3D yAxis;
+    Vector3D zAxis;
+    Vector3D origin;
+    char[32] name;
+}
+```
 
 ## MTX - Local objects
 
