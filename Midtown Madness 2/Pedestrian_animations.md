@@ -37,38 +37,48 @@ respectively.
 
 A C-style format definition looks like this:
 
-`struct Anim`
-`{`
-`    ulong nChannels;`
-`    ulong nFrames;`
-`    Channel channels[nChannels];`
-`}`
+```
+struct Anim
+{
+    ulong nChannels;
+    ulong nFrames;
+    Channel channels[nChannels];
+}
+```
 
-`struct Channel`
-`{`
-`    ulong nFloatsPerFrame;`
-`    float unknown;`
-`    byte channelType;`
-`    Frame frames[nFrames];`
-`}`
+```
+struct Channel
+{
+    ulong nFloatsPerFrame;
+    float unknown;
+    byte channelType;
+    Frame frames[nFrames];
+}
+```
 
-`union Frame`
-`{`
-`    RPHFrame rphFrame;                // If channelType = 0x01`
-`    float floats[nFloatsPerFrame];    // Other channel types`
-`}`
+```
+union Frame
+{
+    RPHFrame rphFrame;                // If channelType = 0x01
+    float floats[nFloatsPerFrame];    // Other channel types
+}
+```
 
-`struct RPHFrame`
-`{`
-`    Vector translation; // Translation of the root bone for this frame`
-`    RPH rph[nBones];    // Roll, Pitch and Heading angles`
-`}`
+```
+struct RPHFrame
+{
+    Vector translation; // Translation of the root bone for this frame
+    RPH rph[nBones];    // Roll, Pitch and Heading angles
+}
+```
 
-`struct RPH`
-`{`
-`    float roll;    // Angle in radians`
-`    float pitch;   // Angle in radians`
-`    float heading; // Angle in radians`
-`}`
+```
+struct RPH
+{
+    float roll;    // Angle in radians
+    float pitch;   // Angle in radians
+    float heading; // Angle in radians
+}
+```
 
 Note that for channel type 0x01, nFloatsPerFrame = (nBones + 1) \* 3.
