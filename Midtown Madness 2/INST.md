@@ -17,48 +17,49 @@ There are two types of components:
 
 ### Structure
 
-`INST`
-`{`
-`    INSTComponent[] components;`
-`}`
+```INST
+{
+    INSTComponent[] components;
+}
 
-`INSTComponentHeader`
-`{`
-`    unsigned short blockIndex;              // Index +1 of the block this `
-`                                            // package is placed on`
-`    unsigned short modifiers;               // Modifies the appearance of `
-`                                            // the object, see below`
-`    unsigned char  type;                    // Highest bit indicates `
-`                                            // component type, the rest is`
-`                                            // length of "packageName"`
-`    unsigned char[type & 0x7f] packageName; // Zero-terminated name-part of`
-`                                            // the PKG filename`
-`}`
+INSTComponentHeader
+{
+    unsigned short blockIndex;              // Index +1 of the block this 
+                                            // package is placed on
+    unsigned short modifiers;               // Modifies the appearance of 
+                                            // the object, see below
+    unsigned char  type;                    // Highest bit indicates 
+                                            // component type, the rest is
+                                            // length of "packageName"
+    unsigned char[type & 0x7f] packageName; // Zero-terminated name-part of
+                                            // the PKG filename
+}
 
-`INSTCoordinateComponent`
-`{`
-`    INSTComponentHeader header; // The type field has the top bit cleared`
-`    Vector      xAxis;`
-`    Vector      yAxis;`
-`    Vector      zAxis;`
-`    Vector      origo;`
-`}`
+INSTCoordinateComponent
+{`
+    INSTComponentHeader header; // The type field has the top bit cleared
+    Vector      xAxis;
+    Vector      yAxis;
+    Vector      zAxis;
+    Vector      origo;
+}
 
-`INSTSimpleComponent`
-`{`
-`    INSTComponentHeader header; // The type field has the top bit set`
-`                                // (type >= 0x80)`
-`    float    xDelta;`
-`    float    zDelta;`
-`    Vector location;`
-`}`
+INSTSimpleComponent
+{
+    INSTComponentHeader header; // The type field has the top bit set
+                                // (type >= 0x80)
+    float    xDelta;
+    float    zDelta;
+    Vector location;
+}
 
-`Vector`
-`{`
-`    float x;`
-`    float y;`
-`    float z;`
-`}`
+Vector
+{
+    float x;
+    float y;
+    float z;
+}
+```
 
 The *modifiers* define what *paint job* should be used for the object,
 among other things. The least significant bits of this field, currently
