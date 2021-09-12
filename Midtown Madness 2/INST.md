@@ -24,7 +24,7 @@ There are two types of components:
 
 INSTComponentHeader
 {
-    unsigned short blockIndex;              // Index +1 of the block this 
+    unsigned short room Index;              // Index of the room this 
                                             // package is placed on
     unsigned short modifiers;               // Modifies the appearance of 
                                             // the object, see below
@@ -78,4 +78,4 @@ INSTSimpleComponents use a more compact, less flexible method of placing
 geometry. The vector named *location* is the coordinate for (0, 0, 0) of
 PKG coordinates in city-coordinates. These objects face the the
 direction given by xDelta and zDelta. The scale is determined by the
-magnitude of the rotation vector.
+magnitude of the vector.
