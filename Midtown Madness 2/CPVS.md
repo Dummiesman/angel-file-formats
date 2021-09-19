@@ -9,19 +9,21 @@ what parts of a scene to take into account when rendering.
 ## Format description
 
 The CPVS file simply contains a list of visible blocks for every block
-in the [PSDL](PSDL "wikilink"). What makes the CPVS file a bit different
+in the [PSDL](PSDL.md). What makes the CPVS file a bit different
 is that the lists are compressed using a "run-length-encoding"
 algorithm.
 
 In a pseudo C-style format, the file looks like this:
 
-`struct CPVS`
-`{`
-`    char[4] header = "PVS0";`
-`    ulong nBlocks;    // Number of blocks + 2`
-`    ulong[nBlocks - 2] offsets;`
-`    uchar[rest of file] pvsLists;`
-`}`
+```C
+struct CPVS
+{
+    char[4] header = "PVS0";
+    ulong nBlocks;    // Number of blocks + 2
+    ulong[nBlocks - 2] offsets;
+    uchar[rest of file] pvsLists;
+}
+```
 
 The *offsets* array indicates how far into the *pvsLists* block to go to
 find the start of the compressed list for each block.
@@ -52,9 +54,11 @@ So, consider a city consisting of 16 blocks. If blocks number 0, 2, 3
 and 4 are visible from a particular block, the list of that block would
 look like this:
 
-`Hex:   c   c    0   f    0   0    0   0    0   0`
-`Bin:  |11001100|00001111|00000000|00000000|00000000|`
-`Block: 2 1 0 *  6 5 4 3  a 9 8 7  e d c b  * * * f`
+```
+Hex:   c   c    0   f    0   0    0   0    0   0
+Bin:  |11001100|00001111|00000000|00000000|00000000|
+Block: 2 1 0 *  6 5 4 3  a 9 8 7  e d c b  * * * f
+```
 
 Note that the last byte is padded with zero to fill up the byte.
 
@@ -73,7 +77,7 @@ repeats the process.
 
 A run-length decoder can look something like this:
 
-```
+```C
 char buf[bufSize];
 int bufPos = 0;
 int i;
