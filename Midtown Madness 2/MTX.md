@@ -23,10 +23,12 @@ The file contains four vectors. The first three define a bounding box
 and a center of gravity while the fourth defines an offset for the
 coordinate system.
 
-`struct MTX`
-`{`
-`   Vector3D min;    // Minimum x, y and z`
-`   Vector3D max;    // Maximum x, y and z`
-`   Vector3D cog;    // Center of gravity, object is rotated around this point`
-`   Vector3D origin; // Origin of the local coordinate system`
-`}`
+```C
+struct MTX
+{
+   Vector3D min;    // Minimum x, y and z
+   Vector3D max;    // Maximum x, y and z
+   Vector3D cog;    // Center of gravity, object is rotated around this point
+   Vector3D origin; // Origin of the local coordinate system
+}
+```
