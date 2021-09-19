@@ -1,5 +1,5 @@
 BND is a simple ASCII format file used to define the collision box of a
-[PKG](PKG "wikilink") object. An example of a BND file would be this:
+[PKG](PKG.md) object. An example of a BND file would be this:
 
 <i>vp4x4_BOUND.bnd</i>
 
