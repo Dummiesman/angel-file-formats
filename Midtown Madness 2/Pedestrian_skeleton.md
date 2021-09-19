@@ -33,19 +33,21 @@ When rendering a pedestrian model, each vertex has to be modified
 according to the bone it is connected to. For example, if we have a
 skeleton that looks like this:
 
-`NumBones 3`
-`bone root {`
-`   offset 0.000570 1.109821 -0.000000`
-`   bone spine {`
-`      offset 0.000000 0.034733 -0.000000`
-`      bone neck {`
-`         offset 0.000000 0.329534 -0.000000`
-`         bone head {`
-`            offset 0.000000 0.107686 -0.000000`
-`         }`
-`      }`
-`   }`
-`}`
+```
+NumBones 3
+bone root {
+   offset 0.000570 1.109821 -0.000000
+   bone spine {
+      offset 0.000000 0.034733 -0.000000
+      bone neck {
+         offset 0.000000 0.329534 -0.000000
+         bone head {
+            offset 0.000000 0.107686 -0.000000
+         }
+      }
+   }
+}
+```
 
 And we want to render the faces connected to the head, each vertex has
 to be translated by four offsets. First the offset of the root bone,
