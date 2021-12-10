@@ -30,7 +30,7 @@ struct Pathset
 {
     char[4] id = "PTH1";
     ulong nPaths;    // Number of paths in this pathset
-    ulong unknown0;
+    ulong currentPath; // The currently selected path, used in development tools
     struct Path paths[nPaths];
 }
 
