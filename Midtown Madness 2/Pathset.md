@@ -43,7 +43,7 @@ struct Path
     uchar type;       // See definition below
     uchar spacing;    // Spacing of props placed between the points in
                       // units of 1/4 metres (spacing = (ulong)(metres * 4))
-    ushort unknown3;
+    char padding[2];
 }
 
 struct Point
