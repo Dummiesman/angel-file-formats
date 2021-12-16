@@ -1,5 +1,4 @@
-BND is a simple ASCII format file used to define the collision box of a
-[PKG](PKG "wikilink") object. An example of a BND file would be this:
+BND is a simple ASCII format file used to define the collision box of an object. An example of a BND file would be this:
 
 <i>vp4x4_BOUND.bnd</i>
 
@@ -29,6 +28,7 @@ BND is a simple ASCII format file used to define the collision box of a
         sound: 0
     }
 
+    // the final number is the material index
     quad 0  1  2  3  0
     tri 3  4  0  0
     quad 5  6  7  8  0
