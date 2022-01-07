@@ -30,7 +30,7 @@ struct Pathset
 {
     char[4] id = "PTH1";
     ulong nPaths;    // Number of paths in this pathset
-    ulong unknown0;
+    ulong currentPath; // The currently selected path, used in development tools
     struct Path paths[nPaths];
 }
 
@@ -43,7 +43,7 @@ struct Path
     uchar type;       // See definition below
     uchar spacing;    // Spacing of props placed between the points in
                       // units of 1/4 metres (spacing = (ulong)(metres * 4))
-    ushort unknown3;
+    char padding[2];
 }
 
 struct Point

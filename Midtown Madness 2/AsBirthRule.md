@@ -50,7 +50,7 @@ This block can contain several tag-value parameters:
 | BirthFlags    | int               | Particle flags. 2 = Collision, 4 = Animated, 8 = KillOnCollision, 16 = Animated (cyle from start-end frame rapidly). Can be combined.                                                                              |
 | Height        | float             | Unknown                                                                              |
 | Intensity     | float             | Unknown                                                                              |
-| Color         | int               | Controls colour of the particles in some mysterious way that only Stereo understands |
+| Color         | int               | 32 bit integer for color represented in decimal form. (ex. FFFEFFFE = -16777473) |
 
 Tags of the asBirthRule block
 
