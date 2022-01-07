@@ -45,7 +45,7 @@ the connecting blocks.
 After the perimeter comes a list of the various geometric primitives, or
 block attributes, that defines the interior of the block. Each of these
 attributes has a different structure. All known attributes are described
-on the [Block attributes](Block_attributes "wikilink") page. Even though
+on the [Block attributes](Block_attributes.md) page. Even though
 the structure differs from attribute to attribute, each attribute is
 identified by an attribute id. This id is a 16 bit integer, but only the
 lowest seven bits control the type of the attribute. If bit eight is
@@ -102,88 +102,90 @@ accordingly.
 
 In a pseudo-C style structure, a PSDL-file looks like this:
 
-`struct PSDL`
-`{`
-`    char[4]               identifier = "PSD0";`
-`    ulong                 targetSize = 2;  // Unknown`
-`    ulong                 nVertices;       // Number of vertices`
-`    Vertex[nVertices]     vertices;`
-`    ulong                 nHeights;        // Number of heights`
-`    float[nHeights]       heights;`
-`    ulong                 nTextures;       // Number of textures + 1`
-`    String[nTextures - 1] textures;`
-`    ulong                 nBlocks;         // Number of blocks + 1`
-`    ulong                 unknown0;        // Number of junctions?`
-`    Block[nBlocks - 1]    blocks;`
-`    char                  unknown1 = 0x00;`
-`    char[nBlocks - 1]     blockType;       // List of bytes with block type flags`
-`    char                  unknown2 = 0xcd;`
-`    char[nBlocks - 1]     propRule;        // Identifies what prop rule to use for each`
-`                                           // block, in case a prop path traverses the`
-`                                           // block`
-`    // Terrain dimensions:`
-`    Vertex                min;             // min and max defines a bounding box around`
-`                                           // the entire terrain`
-`    Vertex                max;`
-`    Vertex                center;          // Center of bounding sphere`
-`    float                 radius;          // Radius of bounding sphere`
+```C
+struct PSDL
+{
+    char[4]               identifier = "PSD0";
+    ulong                 targetSize = 2;  // Unknown
+    ulong                 nVertices;       // Number of vertices
+    Vertex[nVertices]     vertices;
+    ulong                 nHeights;        // Number of heights
+    float[nHeights]       heights;
+    ulong                 nTextures;       // Number of textures + 1
+    String[nTextures - 1] textures;
+    ulong                 nBlocks;         // Number of blocks + 1
+    ulong                 unknown0;        // Number of junctions?
+    Block[nBlocks - 1]    blocks;
+    char                  unknown1 = 0x00;
+    char[nBlocks - 1]     blockType;       // List of bytes with block type flags
+    char                  unknown2 = 0xcd;
+    char[nBlocks - 1]     propRule;        // Identifies what prop rule to use for each
+                                           // block, in case a prop path traverses the
+                                           // block
+    // Terrain dimensions:
+    Vertex                min;             // min and max defines a bounding box around
+                                           // the entire terrain
+    Vertex                max;
+    Vertex                center;          // Center of bounding sphere
+    float                 radius;          // Radius of bounding sphere
 
-`    // Block based props section:`
-`    ulong                 nPaths;          // Number of prop path definitions`
-`    BlockPath[nPaths]     paths;`
-`}`
+    // Block based props section:
+    ulong                 nPaths;          // Number of prop path definitions
+    BlockPath[nPaths]     paths;
+}
 
-`struct Vertex`
-`{`
-`    float x;`
-`    float y;`
-`    float z;`
-`}`
+struct Vertex
+{
+    float x;
+    float y;
+    float z;
+}
 
-`struct String`
-`{`
-`    uchar            length;            // Length of string including terminator`
-`    char[length - 1] string;            // ASCII characters of name part of a texture`
-`                                        // filename`
-`    char             terminator = 0x00;`
-`}`
+struct String
+{
+    uchar            length;            // Length of string including terminator
+    char[length - 1] string;            // ASCII characters of name part of a texture
+                                        // filename
+    char             terminator = 0x00;
+}
 
-`struct Block`
-`{`
-`    ulong                            nPerimeterPoints; // Number of perimeter points`
-`    ulong                            attributeSize;    // Size of attribute list`
-`    PerimeterPoint[nPerimeterPoints] perimeter;`
-`    ushort[attributeSize]            `[`attributes`](Block_attributes "wikilink")`;`
-`}`
+struct Block
+{
+    ulong                            nPerimeterPoints; // Number of perimeter points
+    ulong                            attributeSize;    // Size of attribute list
+    PerimeterPoint[nPerimeterPoints] perimeter;
+    ushort[attributeSize]            attributes;       // Block attributes
+}
 
-`struct PerimeterPoint`
-`{`
-`    ushort vertex;  // index in vertex list`
-`    ushort block;   // index in block list + 1`
-`}`
+struct PerimeterPoint
+{
+    ushort vertex;  // index in vertex list
+    ushort block;   // index in block list + 1
+}
 
-`struct BlockPath // TODO: This description is wrong, it reflects a previous`
-`                 // misconception about a connection to the BAI file.`
-`                 // It adds up, but some of the parameter names are`
-`                 // wrong.`
-`{`
-`    ushort                   unknown4;`
-`    ushort                   unknown5;`
-`    ubyte                    nFLanes;         // Number of lanes in the forward`
-`                                              // direction?`
-`    ubyte                    nBLanes;         // Number of lanes in the`
-`                                              // backward direction?`
-`    float[nFLanes + nBLanes] density;         // Traffic density on each lane?`
-`    ushort                   unknown6;        // Looks like some flags in a`
-`                                              // bit-field.`
-`    ushort[4]                startCrossroads; // Vertices defining the road`
-`                                              // part of a crossing at the`
-`                                              // start of the road.`
-`    ushort[4]                endCrossroads;   // Vertices defining the road`
-`                                              // part of a crossing at the end`
-`                                              // of the road.`
-`    uchar                    nRoadBlocks;     // Number of blocks that make up`
-`                                              // this road.`
-`    ushort[nRoadBlocks]      roadBlocks;      // Block ID + 1 of each block`
-`                                              // that makes up this road.`
-`}`
+struct BlockPath // TODO: This description is wrong, it reflects a previous
+                 // misconception about a connection to the BAI file.
+                 // It adds up, but some of the parameter names are
+                 // wrong.
+{
+    ushort                   unknown4;
+    ushort                   unknown5;
+    ubyte                    nFLanes;         // Number of lanes in the forward
+                                              // direction?
+    ubyte                    nBLanes;         // Number of lanes in the
+                                              // backward direction?
+    float[nFLanes + nBLanes] density;         // Traffic density on each lane?
+    ushort                   unknown6;        // Looks like some flags in a
+                                              // bit-field.
+    ushort[4]                startCrossroads; // Vertices defining the road
+                                              // part of a crossing at the
+                                              // start of the road.
+    ushort[4]                endCrossroads;   // Vertices defining the road
+                                              // part of a crossing at the end
+                                              // of the road.
+    uchar                    nRoadBlocks;     // Number of blocks that make up
+                                              // this road.
+    ushort[nRoadBlocks]      roadBlocks;      // Block ID + 1 of each block
+                                              // that makes up this road.
+}
+```
