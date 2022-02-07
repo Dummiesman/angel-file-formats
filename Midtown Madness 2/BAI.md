@@ -7,7 +7,7 @@ ambients such as pedestrians and automated traffic.
 
 A BAI-file is built up in three sections. One section describes the
 routes, or roads, that are available for pedestrians and ambient
-traffic. One section describes the blocks where roads intersect and
+traffic. One section describes the rooms where roads intersect and
 where pedestrians and ambient traffic are presented with a choice to
 select which road to take next. The last part of the BAI-file controls
 what roads are active for computations of pedestrians and ambient
@@ -18,24 +18,24 @@ traffic.
 ![Route.jpg](Route.jpg "Route.jpg") The first section defines all the
 routes that pedestrians and ambient traffic can travel along. The
 routes, or roads, are defined by listing the [PSDL](PSDL.md)
-blocks they pass through as well as several control curves defining
+rooms they pass through as well as several control curves defining
 lanes for pedestrians, cars, trams and trains.
 ![Route-oneway.jpg](Route-oneway.jpg "Route-oneway.jpg")
 
 ### Intersections
 
 After the routes, all intersections are defined. This is done by
-informing MM2 of what [PSDL](PSDL.md) block the intersection is
+informing MM2 of what [PSDL](PSDL.md) room the intersection is
 located on and what roads are connected to this intersection.
 
 ### Culling
 
 The last part of the BAI-file lists the roads to compute ambients for
-depending on the given [PSDL](PSDL.md) block id. This section is
+depending on the given [PSDL](PSDL.md) room id. This section is
 divided into two parts, one for large AI-bubbles and one for small. Each
-part gives one list of road indices that are to be active for each block
+part gives one list of road indices that are to be active for each room
 of the PSDL. Active means that AI computations are performed for the
-roads listed for the block that the player is currently on. The first
+roads listed for the room that the player is currently on. The first
 list in each part should be ignored and thus set to a length of zero.
 
 ### Structure
@@ -60,8 +60,8 @@ struct Road
     unsigned short id;
     unsigned short nSections;       // Number of vertex sets
     unsigned short unknown0;        // No idea
-    unsigned short nBlocks;         // Number of block references
-    unsigned short blocks[nBlocks]; // References to the PSDL
+    unsigned short nRooms;          // Number of room references
+    unsigned short rooms[nRooms];   // References to the SDL
     float          unknown1;        // Not sure. Speed threshold?
     float          unknown2;        // Always == 15
 
@@ -84,7 +84,7 @@ struct Road
 struct Intersection
 {
     unsigned short id;
-    unsigned short block;         // Reference to the PSDL, (index + 1)
+    unsigned short room;          // Reference to the SDL, (index + 1)
     Vertex         center;        // Center point of intersection
     unsigned short nRoads;        // Number of connected roads
     unsigned long  roads[nRoads]; // Counterclockwise ordered references to roads connected to this intersection
@@ -94,9 +94,9 @@ struct Intersection
 ```C
 struct Culling
 {
-    unsigned long  nBlocks;        // Number of blocks in the PSDL + 1
-    CullingList    cull0[nBlocks]; // Large AI bubbles
-    CullingList    cull1[nBlocks]; // Small AI bubbles
+    unsigned long  nRooms;         // Number of rooms in the SDL + 1
+    CullingList    cull0[nRooms];  // Large AI bubbles
+    CullingList    cull1[nRooms];  // Small AI bubbles
 };
 ```
 
