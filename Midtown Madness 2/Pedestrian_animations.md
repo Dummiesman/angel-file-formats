@@ -1,3 +1,5 @@
+## NEEDS REWRITE. This format is specification is incorrect, and is also based on the beta version of the game.
+
 Each animation sequence, associated with a state, is made up by a number
 of key frames. Each key frame has several parameters that should be
 applied to each bone in the skeleton. By moving the skeleton, the entire
