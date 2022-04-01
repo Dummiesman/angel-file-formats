@@ -23,9 +23,7 @@ slightly different.
     sets of texture coordinates. Unfortunately the MM2 models always
     specify 0 here.
   - tangents: <integer>
-    I know what the mathematical definition of a tangent is, but I
-    failed to see how this applies to these models. The MM2 models
-    always use 0 here.
+    I don't know if tangents are used, but they are expected to be present if this is nonzero.
   - materials: <integer>
     The faces of the model are grouped by the material, or shader, they
     use. This indicates the number of such groups. This is equal to the
@@ -54,9 +52,7 @@ Then follows a list of normal vectors, they have a similar format:
   - n <float> <float> <float>
     where the floats are *x*, *y* and *z* respectively.
 
-After the normals comes the colours, I can only guess the order of the
-colour components since all MM2 models define only one colour, the
-whitest white:
+After the normals comes the colors:
 
   - c <float> <float> <float> <float>
     where the floats are *red*, *green*, *blue* and *alpha*
@@ -71,6 +67,12 @@ Then follows the second set:
 
   - t2 <float> <float>
 
+Finally comes the tangents in two separate lists of statements:
+  
+  - ts <float> <float> <float>
+  followed by a list of
+  - tt <float> <float> <float>
+  
 The original MM2 models actually have one set of texture coordinates
 defined, but since no texture sheet is supplied in the shaders, they are
 not used in game.
@@ -81,11 +83,10 @@ Now all basic data is defined, now the file defines the various groups
 of faces. These groups the faces to the shaders. The order of these
 groups is important - it must match the order of the shaders defined in
 the [pedmodel_\*.shaders](Pedestrian_shaders "wikilink") file. Each
-group has a name constructed of a model name and a group name. Both of
-these are text names without whitespace. A group definition starts with
+group has a name constructed of a model name and a group name. A group definition starts with
 this:
 
-  - mtl <modelname>:<groupname> {
+  - mtl <name> {
 
 And ends with:
 
@@ -108,9 +109,7 @@ Between these comes several parameters:
     The number of textures used in this group, possibly limited to 0, 1
     or 2.
   - illum: <illumination type>
-    Defines the type of illumination model to use for this group, I have
-    only seen the value diffuse here, but I have a faint memory of
-    figuring out a list of other possible choices. Can't find it now...
+    Defines the type of illumination model to use for this group, possible values are "diffuse" or "emit"
   - ambient: <float> <float> <float>
     Defines the default ambient colour for this group, the floats are
     *red*, *green* and *blue* colour components respectively.
@@ -130,10 +129,9 @@ If the parameter textures isn't 0, the texture names are listed here on
 this format:
 
   - texture: <int> <texturename>
-    where the int is the index of the texture, starting with 0(?) and
+    where the int is the index of the texture, starting with 1 and
     texturename is a string defining the filename of the texture without
-    extension. Since the texture names are also overridden by the
-    shaders file, I'm not sure what these are for.
+    extension.
 
 If the groups does not define any packets, the group definitions are
 followed by one list of adjuncts and one list of primitives. Each
@@ -144,14 +142,15 @@ adjunct is defines like this:
     coordinate index in set 1 and texture coordinate index in set 2
     respectively.
 
-Each primitive used in the MM2 models are triangles, it might be
-possible to use quads as well, but this is uncertain. The triangle
-primitives are defined like this:
+Each primitive used in the MM2 models are triangles, other AGE games support stp and str (strip and reversed strip)
 
   - tri <int> <int> <int>
     Where the ints are vertex indices of the three corners of the
-    triangle. At the moment I can't recall if the front face is defined
-    in a clockwise or counter clockwise order.
+    triangle.
+  - stp <int> <list>
+    Where the first int is count, followed by a list of indices.
+  - str <int> <list>
+    Same as above, but opposite winding
 
 The way to discriminate which adjuncts and primitives belong to which
 material group, the order and count of the adjuncts and primitives of
@@ -167,9 +166,8 @@ parameter in the material groups, the adjuncts and primitives are
 defined differently. Each packet has it's own adjunct and primitive
 lists. A packet also has a list of matrix indices. A packet starts with:
 
-  - packet <int> <int> <int> {
-    Where the ints are number of adjuncts, number of primitives and
-    number of matrices, contained in this packet, respectively, and ends
+  - packet <int> <int> <int> <optional:int> {
+    Where the ints are number of adjuncts, number of primitives, number of matrices, and optionally number of reskins contained in this packet, respectively, and ends
     with:
 
 <!-- end list -->
@@ -177,7 +175,7 @@ lists. A packet also has a list of matrix indices. A packet starts with:
   - }
 
 Within the packet is first the list of adjuncts, then the list of
-primitives and last the list of matrix indices. The adjunct list is
+primitives (with indices localized to the adjuncts in the packet) and last the list of matrix indices. The adjunct list is
 different from before, each adjunct looks like this:
 
   - adj <int> <int> <int> <int> <int> <int>
