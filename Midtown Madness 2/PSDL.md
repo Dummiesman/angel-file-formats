@@ -109,19 +109,17 @@ struct PSDL
     ulong                 targetSize = 2;  // Unknown
     ulong                 nVertices;       // Number of vertices
     Vertex[nVertices]     vertices;
-    ulong                 nHeights;        // Number of heights
-    float[nHeights]       heights;
+    ulong                 nFloats;        // Number of floats
+    float[nFloats]        floats;
     ulong                 nTextures;       // Number of textures + 1
     String[nTextures - 1] textures;
-    ulong                 nBlocks;         // Number of blocks + 1
+    ulong                 nRooms;         // Number of rooms
     ulong                 unknown0;        // Number of junctions?
-    Block[nBlocks - 1]    blocks;
-    char                  unknown1 = 0x00;
-    char[nBlocks - 1]     blockType;       // List of bytes with block type flags
-    char                  unknown2 = 0xcd;
-    char[nBlocks - 1]     propRule;        // Identifies what prop rule to use for each
-                                           // block, in case a prop path traverses the
-                                           // block
+    Block[nRooms - 1]     rooms;
+    char[nRooms]          roomFlags;       // List of bytes with room type flags
+    char[nRooms]          propRule;        // Identifies what prop rule to use for each
+                                           // room, in case a prop path traverses the
+                                           // room
     // Terrain dimensions:
     Vertex                min;             // min and max defines a bounding box around
                                            // the entire terrain
