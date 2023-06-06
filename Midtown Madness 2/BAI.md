@@ -62,8 +62,8 @@ struct Road
     unsigned short unknown0;        // No idea
     unsigned short nRooms;          // Number of room references
     unsigned short rooms[nRooms];   // References to the SDL
-    float          unknown1;        // Not sure. Speed threshold?
-    float          unknown2;        // Always == 15
+    float          baseSpeed;        // The base speed for vehicles travelling on this road (base because vehicles get additional speed on freeways)
+    float          halfWidth;        // The width of half of the road
 
     RoadData       right;           // Data for right side
     RoadData       left;            // Data for left side
@@ -114,8 +114,8 @@ struct RoadData
     unsigned short nLanes;        // Number of lanes
     unsigned short nTrams;        // Number of tram rails (bool?)
     unsigned short nTrains;       // Number of train rails (bool?)
-    unsigned short unknown3;      // Sidewalk? Always == 1 (bool?)
-    unsigned short unknown4;      // Type of ambients allowed on this side of the road (see below)
+    unsigned short nSidewalks;      // Sidewalk? Always == 1 (bool?)
+    unsigned short ambientTypes;      // Type of ambients allowed on this side of the road (see below)
 
     float  lanesDistances[nLanes][nSections]; // Distances for right lanes
     float  distance[nSections];               // Outer edge distance
@@ -157,7 +157,7 @@ struct Vector
 }
 ```
 
-Values for *RoadData.unknown4*:
+Values for *RoadData.ambientTypes*:
 
   - 0 - Vehicles and pedestrians
   - 1 - Pedestrians only
