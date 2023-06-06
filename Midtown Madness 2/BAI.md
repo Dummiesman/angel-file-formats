@@ -117,15 +117,14 @@ struct RoadData
     unsigned short nSidewalks;      // Sidewalk? Always == 1 (bool?)
     unsigned short ambientTypes;      // Type of ambients allowed on this side of the road (see below)
 
-    float  lanesDistances[nLanes][nSections]; // Distances for right lanes
-    float  distance[nSections];               // Outer edge distance
-    float  Unknown[11 + nLanes];              // Something about the lanes, gladly padded with 0xcdcdcdcd
-    Vertex lLanesVertices[nLanes][nSections]; // Vertices for driving lane splines
-    Vertex sidewalkCenter[nSections];         // Vertices for sidewalk central spline
-    Vertex tramVertices[nTrams][nSections];   // Vertices for tram rail splines
-    Vertex trainVertices[nTrains][nSections]; // Vertices for train rail splines
-    Vertex sidewalkInner[nSections];          // Vertices for sidewalk inner spline
-    Vertex sidewalkOuter[nSections];          // Vertices for sidewalk outer spline
+    float  distance[nLanes+nSidewalks]                    // Outer edge distance
+    float  lanesDistances[nLanes+nSidewalks][nSections];  // Distances between lane vertices
+    char miscData[40];                                    // An interesting set of data (todo:document)
+    Vertex lLanesVertices[nLanes+nSidewalks][nSections];  // Vertices for driving lane splines
+    Vertex tramVertices[nTrams][nSections];               // Vertices for tram rail splines
+    Vertex trainVertices[nTrains][nSections];             // Vertices for train rail splines
+    Vertex sidewalkInner[nSections];                      // Vertices for sidewalk inner spline
+    Vertex sidewalkOuter[nSections];                      // Vertices for sidewalk outer spline
 };
 ```
 
