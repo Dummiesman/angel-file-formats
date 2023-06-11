@@ -2,8 +2,33 @@
  
 These files define various information about the city, and about races. Such as opponent data, police data, speed limit, etc.
 
+### Police
+The police section applies to race type aimap files, and a typical section may look like this
+```
+[Police]
+4
+vpcop	-515.073303 0.794136 -764.161438 0.000000 0 15 0.500000 50.000000
+vpcop	-140.574158 2.248685 -426.436615 90.000000 0 15 0.500000 50.000000
+vpcop	58.999908 -0.000300 71.631035 -110.000000 0 15 0.500000 50.000000
+vpcop	-384.070313 24.455929 991.674805 0.000000 0 15 0.500000 50.000000
+```
+
+The first number is the amount of police cars, followed by a definition for each
+
+|Example Value|Name|Meaning|
+|-----|-----|-----|
+|vpcop|Basename|The type of vehicle the cop will use|
+|-515.07330|Spawn Position (X)|The X coordinate where the vehicle will spawn|
+|0.794136|Spawn Position (Y)|The Y coordinate where the vehicle will spawn|
+|-764.161438|Spawn Position (Z)|The Z coordinate where the vehicle will spawn|
+|0.000000|Spawn Rotation (Degrees)|The spawn rotation of the vehicle, in degrees|
+|0|Unknown/Unused|It's unknown what this value does, it may be unused. This value should be set to zero.|
+|15|Flags|Flags explanation (TODO)|
+|0.500000|Opponent Chase Chance|When looking for an opponent to chase, the game will draw a random number from 0-1, if the random number is lower or equal to this chance value, the cop will give chase|
+|50.00000|Opponent Detection Distance|When looking for an opponent to chase, they must be closer than this distance in meters for the cop to give chase|
+
 ## Opponents
-The opponents section applies to race type aimap files, and looks like this
+The opponents section applies to race type aimap files, and a typical section may look like this
 ```
 [Opponent]
 6
