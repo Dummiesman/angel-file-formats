@@ -25,7 +25,7 @@ The first number is the amount of opponents, followed by a definition for each
 |0.79|Throttle|The maximum amount of throttle input the opponent may use. Values above 1.0 are valid|
 |0|Unknown/Unused|Current knowledge indicates that this value is probably unused, and should just be set to zero|
 |50.000000|Unknown|This value effects pathfinding in some way. High values in the thousands freeze the game. It's best to leave this at about 50.000000|
-|0.700000|Braking Threshold|The AI will calculate how much brake it needs going into corners. If the brake is below this value, the AI will not apply the brakes|
+|0.700000|Braking Threshold|The AI will calculate how much brake it needs going into corners. If the calculated braking power is below this value, the AI will not apply the brakes|
 |1|Avoid Traffic|Setting this to 1 makes the opponent avoid traffic, a setting of 0 means they will ignore traffic vehicles|
 |1|Avoid Props|Setting this to 1 makes the opponent avoid props, a setting of 0 means they will ignore propss|
 |1|Avoid Players|Setting this to 1 makes the opponent avoid player vehicles, a setting of 0 means they will ignore players|
