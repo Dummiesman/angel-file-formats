@@ -23,7 +23,7 @@ The first number is the amount of police cars, followed by a definition for each
 |-764.161438|Spawn Position (Z)|The Z coordinate where the vehicle will spawn|
 |0.000000|Spawn Rotation (Degrees)|The spawn rotation of the vehicle, in degrees|
 |0|Unknown/Unused|It's unknown what this value does, it may be unused. This value should be set to zero.|
-|15|Flags|Flags explanation (TODO)|
+|15|Flags|Flags that determine the behavior of the cop AI. Or should I say, flags that *would* control it if it wasn't hardcoded to only use one behavior.|
 |0.500000|Opponent Chase Chance|When looking for an opponent to chase, the game will draw a random number from 0-1, if the random number is lower or equal to this chance value, the cop will give chase|
 |50.00000|Opponent Detection Distance|When looking for an opponent to chase, they must be closer than this distance in meters for the cop to give chase|
 
