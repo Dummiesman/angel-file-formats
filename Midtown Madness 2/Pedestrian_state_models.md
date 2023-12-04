@@ -1,5 +1,4 @@
-![Pedmodel_woman.csv.png](Pedmodel_woman.csv.png
-"Pedmodel_woman.csv.png") The animation of a pedestrian is based on a
+The animation of a pedestrian is based on a
 state model. A pedestrian is always in a specific state and each state
 is connected to an animation sequence. For example, if the pedestrian is
 in the state "WALK", the animation named pedanim_womwalk.anim is
@@ -27,14 +26,12 @@ constructed of the following values in this order:
   - Animation sequence - String, the name of the animation sequence
     associated with this state. these are the padanim_\*.anim file
     names without the .anim extension.
-  - First frame - Integer defining on which frame the animation (loop?)
-    begins.
-  - Last frame - Integer defining on which frame the animation (loop?)
-    ends.
-  - Y axis - Float, unknown. Perhaps a rotation angle.
-  - Y distance - Float, unknown. Perhaps an offset.
-  - Z axis - Float, unknown. Perhaps a rotation angle.
-  - Z distance - Float, unknown. Perhaps an offset.
+  - First frame - Integer defining on which frame the animation begins.
+  - Last frame - Integer defining on which frame the animation ends.
+  - Y axis offset - Unused offset value
+  - Y distance - The *speed* at which the pedestrian moves forwards
+  - X axis offset - Unused offset value
+  - X distance - The *speed* at which the pedestrian moves sidewways (ex. when avoiding player)
   - Next state - String, the name of the state that is activated when
     the animation sequence has played through. For a looping state, this
     indicates the current state.
