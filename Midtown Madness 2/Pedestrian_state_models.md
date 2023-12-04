@@ -29,9 +29,9 @@ constructed of the following values in this order:
   - First frame - Integer defining on which frame the animation begins.
   - Last frame - Integer defining on which frame the animation ends.
   - Y axis offset - Unused offset value
-  - Y distance - The *speed* at which the pedestrian moves forwards
+  - Y distance -  The distance on the Y axis that the pedestrian will travel during the full animation cycle
   - X axis offset - Unused offset value
-  - X distance - The *speed* at which the pedestrian moves sidewways (ex. when avoiding player)
+  - X distance - The distance on the X axis that the pedestrian will travel during the full animation cycle
   - Next state - String, the name of the state that is activated when
     the animation sequence has played through. For a looping state, this
     indicates the current state.
