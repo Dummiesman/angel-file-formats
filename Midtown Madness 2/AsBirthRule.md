@@ -3,22 +3,6 @@ effect where many, small objects are spewed out from a point at certain
 occasions. For weather effects, the particles can be rain drops, for
 colliding with a parking meter, the particles may be coins.
 
-The format is ASCII-based and consist of a block enclosed by *{* and
-*}*.
-
-The files start with a definition of the type of banger data given. None
-of the MM2 files use anything but type *a*, like this:
-
-`type: a`
-
-Next comes the main asBirthRule block:
-
-`asBirthRule {`
-`...`
-`}`
-
-This block can contain several tag-value parameters:
-
 | Tag           | Format            | Description                                                                          |
 | ------------- | ----------------- | ------------------------------------------------------------------------------------ |
 | Position      | float float float | Position where particles originate                                                   |
