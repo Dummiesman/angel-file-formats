@@ -134,7 +134,8 @@ struct RoadEnd
 {
     unsigned long  intersectionID;        // Reference to Intersection[].id
     unsigned short unknown0;              // Always 0xcdcd
-    unsigned long  vehicleRule;           // See below
+    unsigned short  vehicleRule;           // See below
+    unsigned short unknown1;              // Totally unknown
     unsigned long  intersectionRoadIndex; // Index in the intersections road list or 0xcdcdcdcd
     Vertex trafficLightOrigin;            // Origin of traffic light
     Vertex trafficLightAxis;              // Orientation of traffic light
