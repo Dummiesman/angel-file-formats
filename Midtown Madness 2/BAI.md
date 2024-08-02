@@ -59,7 +59,7 @@ struct Road
 {
     unsigned short id;
     unsigned short nSections;       // Number of vertex sets
-    unsigned short unknown0;        // No idea
+    unsigned short flags;           // See below
     unsigned short nRooms;          // Number of room references
     unsigned short rooms[nRooms];   // References to the SDL
     float          baseSpeed;        // The base speed for vehicles travelling on this road (base because vehicles get additional speed on freeways)
@@ -156,6 +156,13 @@ struct Vector
     float z;
 }
 ```
+
+Values for *Road.flags*:
+
+  - 1 - Divided
+  - 2 - Alleyway/Walkway
+  - 4 - Freeway
+  - 8 - Flat (Used to make traffic orientation checks cheaper with roads with just one constant slope)
 
 Values for *RoadData.ambientTypes*:
 
