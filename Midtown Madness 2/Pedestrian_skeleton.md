@@ -1,30 +1,36 @@
-![Pedmodel_woman.skel.png](Pedmodel_woman.skel.png
-"Pedmodel_woman.skel.png") The parts of a pedestrian model are bound to
-a skeleton. A skeleton is constructed by a number of bones that are
-attached with joints. In MM2 the skeletons are defined using a tree
-structure.
+![Pedmodel_woman.skel.png](images/Pedmodel_woman.skel.png)
+The parts of a pedestrian model are bound to a skeleton.
+A skeleton is constructed by a number of bones that are attached with joints.
+In MM2 the skeletons are defined using a tree structure.
 
 ### The format
 
 First comes a parameter defining the number of bones, or actually
 joints, the skeleton is made of:
-
-  - NumBones <int>
+```
+NumBones <int>
+```
 
 Then follows the tree of bones, starting with a root bone that
 represents the origin of the character. Each bone starts with:
+```
+bone <name> {
+```
 
-  - bone <name> {
-    Where name is a string, without whitespace, naming the bone. Each
-    bone ends with:
-  - }
+Where name is a string, without whitespace, naming the bone. Each
+bone ends with:
+```
+}
+```
 
 Between these comes, first an offset and then a list of bones attached
 to the current bone. The offset is on this format:
+```
+  offset <float> <float> <float>
+```
 
-  - offset <float> <float> <float>
-    Where the floats are the *x*, *y* and *z* of a translation relative
-    to the parent bone.
+Where the floats are the *x*, *y* and *z* of a translation relative
+to the parent bone.
 
 The list of bones is just new bone definitions after each other, with no
 separators except whitespace.

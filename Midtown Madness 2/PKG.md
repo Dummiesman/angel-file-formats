@@ -24,7 +24,7 @@ Each file has a name. This name determines the type of the file.
 | Name                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | *\*VL, \*L, \*M, \*H* | Files whose name ends with one of *VL*, *L*, *M* or *H* define geometry primitives. The name suffixes define the LOD, the level of detail, of the particular part of the object. A PKG-file can have any number of separate parts, some have special significance, especially for vehicle models. The suffixes themself stand for Very Low, Low, Medium and High respectively. Look [here](PKG_Groups "wikilink") for a description of the special geometry groups.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| *shaders*             | A PKG-file always have one *shader* file. It defines the visual material properties to use for the surfaces defined in the geometry files. Shaders can be defined in one of two ways, either using floating point colour values or integer colour values. Each shader defines ambient, diffuse, specular and emissive colours. The floating point shader also specifies the shininess used to calculate highlights. Each shader can also specify one texture map. The shaders are organized in groups called *paint jobs*. When an object is placed in game, a certain paint job is requested, either by the [INST](INST "wikilink"), [Pathset](Pathset "wikilink") or [PSDL](PSDL "wikilink") for monuments and props or by user interaction for player vehicle models. Each paint job holds the same number of shaders, even if a particular shader is identical in several paint jobs. Each group of geometry primitives referens an index in to a single paint-job of the shader list. |
+| *shaders*             | A PKG-file always have one *shader* file. It defines the visual material properties to use for the surfaces defined in the geometry files. Shaders can be defined in one of two ways, either using floating point colour values or integer colour values. Each shader defines ambient, diffuse, specular and emissive colours. The floating point shader also specifies the shininess used to calculate highlights. Each shader can also specify one texture map. The shaders are organized in groups called *paint jobs*. When an object is placed in game, a certain paint job is requested, either by the [INST](INST.md), [Pathset](Pathset.md) or [PSDL](PSDL.md) for monuments and props or by user interaction for player vehicle models. Each paint job holds the same number of shaders, even if a particular shader is identical in several paint jobs. Each group of geometry primitives referens an index in to a single paint-job of the shader list. |
 | *offset*              | Unknown, probably provides a way to offset every point of this model with a fixed vector. A PKG-file can only contain one offset file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | *xref*                | Reference to another PKG. Some objects are constructed by attaching several smaller objects to itself. Often these parts are *breakable*. This means that they can be broken off from the main object. Examples are awnings on facades or pieces of driveable vehicles that can break off as a result of careless driving.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
@@ -34,7 +34,7 @@ MM2 can read two types of PKG files, PKG2 and PKG3, these differ
 slightly in the structure. The following C-style format description
 describes this using a *union* type.
 
-```
+```C
 struct PKG
 {
     char[4]   header = "PKG3" | "PKG2";
@@ -42,7 +42,7 @@ struct PKG
 }
 ```
 
-```
+```C
 union PKGFile
 {
     PKG2File pkg2file; // If header == "PKG2"
@@ -50,7 +50,7 @@ union PKGFile
 }
 ```
 
-```
+```C
 struct PKG2File
 {
     char[4]     header = "FILE";
@@ -59,7 +59,7 @@ struct PKG2File
 }
 ```
 
-```
+```C
 struct PKG3File
 {
     char[4]     header = "FILE";
@@ -69,7 +69,7 @@ struct PKG3File
 }
 ```
 
-```
+```C
 struct String
 {
     unsigned byte    length;     // Number of bytes in this string including
@@ -81,7 +81,7 @@ struct String
 
 #### Geometry file
 
-```
+```C
 struct PKGFileData
 {
     long nSections;    // Number of sections making up this LOD
@@ -96,7 +96,7 @@ struct PKGFileData
 }
 ```
 
-```
+```C
 struct PKGSection
 {
     ushort nStrips;       // Number of geometry strips in this section
@@ -108,7 +108,7 @@ struct PKGSection
 }
 ```
 
-```
+```C
 struct PKGStrip
 {
     long primType;          // Determines the primitive type
@@ -119,7 +119,7 @@ struct PKGStrip
 }
 ```
 
-```
+```C
 struct PKGVertex
 {
     Vertex3D coordinate;         // If flags indicate coordinates
@@ -128,7 +128,7 @@ struct PKGVertex
 }
 ```
 
-```
+```C
 struct Vertex3D
 {
     float x;
@@ -137,7 +137,7 @@ struct Vertex3D
 }
 ```
 
-```
+```C
 struct Vector3D
 {
     float x;
@@ -146,7 +146,7 @@ struct Vector3D
 }
 ```
 
-```
+```C
 struct Vertex2D
 {
     float x;
@@ -175,7 +175,7 @@ that the indices make up lists of complete, separate triangles.
 
 #### Shaders
 
-```
+```C
 PKGFileData
 {
     long shaderType; // Bit 7: Shader type
@@ -185,7 +185,7 @@ PKGFileData
 }
 ```
 
-```
+```C
 union PKGShader
 {
     PKGFullShader fullShader; // If type is 0
@@ -198,7 +198,7 @@ Ambient were reversed, and Emissive was incorrectly named Reflective.
 The shader names have also been updated to try and better reflect their
 uses.
 
-```
+```C
 PKGFullShader
 {
     String  textureName;
@@ -210,7 +210,7 @@ PKGFullShader
 }
 ```
 
-```
+```C
 PKGLightShader
 {
     String  textureName;
@@ -221,7 +221,7 @@ PKGLightShader
 }
 ```
 
-```
+```C
 Color4f
 {
     float red;
@@ -231,7 +231,7 @@ Color4f
 }
 ```
 
-```
+```C
 Color4d
 {
     unsigned char red;
@@ -243,7 +243,7 @@ Color4d
 
 #### Offset
 
-```
+```C
 PKGFileData
 {
     Vector3D offset; // Have not tested, but could be an offset added to all
@@ -253,7 +253,7 @@ PKGFileData
 
 #### XRef
 
-```
+```C
 PKGFileData
 {
     long                 nReferences;
@@ -261,7 +261,7 @@ PKGFileData
 }
 ```
 
-```
+```C
 PKGXRef
 {`
     Vector3D xAxis;
@@ -276,7 +276,7 @@ PKGXRef
 
 Some PKGs have several geometry files that are defined in a local
 coordinate system. These are recognised by the fact that they have an
-additional, external file in the filesystem. Look [here](MTX "wikilink")
+additional, external file in the filesystem. Look [here](MTX.md)
 for more information.
 
 ## Boundary files
@@ -284,9 +284,9 @@ for more information.
 MM2 use three file types for collision detection and material properties
 on regular PKG objects:
 
-  - [BND](BND "wikilink") - Simple bound mesh in a plain ASCII format.
-  - [BBND](BBND "wikilink") - Binary version of .bnd
-  - [TER](TER "wikilink") - Unknown, but the MM2 engine does read these
+  - [BND](BND.md) - Simple bound mesh in a plain ASCII format.
+  - [BBND](BBND.md) - Binary version of .bnd
+  - [TER](TER.md) - Unknown, but the MM2 engine does read these
     files
 
 It is not clear when to pick .bbnd/.ter over .bnd, but some indications
