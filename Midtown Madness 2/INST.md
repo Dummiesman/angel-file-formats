@@ -17,7 +17,9 @@ There are two types of components:
 
 ### Structure
 
-```INST
+```C
+
+INST
 {
     INSTComponent[] components;
 }
