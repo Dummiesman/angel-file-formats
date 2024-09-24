@@ -1,26 +1,25 @@
 The *dgBangerData* files are used to define collision properties for
-[PKG](PKG "wikilink") objects. These properties define how an object
+[PKG](PKG.md) objects. These properties define how an object
 behaves when something collides with it.
 
-The file names are derived from the name of the [PKG](PKG "wikilink")
+The file names are derived from the name of the [PKG](PKG.md)
 and the names of the internal parts of it. The syntax is like this for
 the banger data of the entire object:
 
-`/tune/banger/`<pkgname>`.dgBangerData`
+* `/tune/banger/<pkgname>.dgBangerData`
 
 and like this for the breakable parts:
 
-`/tune/banger/`<pkgname>`_`<partname>`.dgBangerData`
+* `/tune/banger/<pkgname>_<partname>.dgBangerData`
 
-For example, the banger data for the wooden barricade,
-*/geometry/sp_barricadewood_f.pkg*, of SF and London is defined in the
+For example, the banger data for the wooden barricade of SF and London, `/geometry/sp_barricadewood_f.pkg`, is defined in the
 following files:
 
-`/tune/banger/sp_barricadewood_f.dgBangerData`
-`/tune/banger/sp_barricadewood_f_BREAK01.dgBangerData`
-`/tune/banger/sp_barricadewood_f_BREAK02.dgBangerData`
-`/tune/banger/sp_barricadewood_f_BREAK03.dgBangerData`
-`/tune/banger/sp_barricadewood_f_BREAK04.dgBangerData`
+* `/tune/banger/sp_barricadewood_f.dgBangerData`
+* `/tune/banger/sp_barricadewood_f_BREAK01.dgBangerData`
+* `/tune/banger/sp_barricadewood_f_BREAK02.dgBangerData`
+* `/tune/banger/sp_barricadewood_f_BREAK03.dgBangerData`
+* `/tune/banger/sp_barricadewood_f_BREAK04.dgBangerData`
 
 ## Specification
 
@@ -30,13 +29,17 @@ The format is ASCII-based and made up of tag-value rows grouped in
 The files start with a definition of the type of banger data given. None
 of the MM2 files use anything but *type a*, like this:
 
-`type: a`
+```
+type: a
+```
 
 Next comes the main *dgBangerData* block:
 
-`dgBangerData {`
+```
+dgBangerData {
 <tags>
-`}`
+}
+```
 
 *<tags>* is replaced by a list of tags from the following table. The
 order of the tags is significant, but some tags may be omitted from the
@@ -64,17 +67,17 @@ file, in that case the values from *default.dgBangerData* is used.
 | CollisionPrim | int               | Defines the type of object used for collision detection, 0=boundary file, 1=bounding box, 2=cylinder with circular base, height is Y-component of *Size* and 3=sphere             |
 | CollisionType | int               | Unknown, values 4, 16 and 48 are used in MM2 files                                                                                                                                |
 
-Tags of the dgBangerData block
+### Tags of the dgBangerData block
 
 The *BirthRule* block is the same as used in the
-[asBirthRule](asBirthRule "wikilink") files used to define particle
+[asBirthRule](asBirthRule.md) files used to define particle
 effects caused by player vehicles.
 
-The image files for particle effects are named *fxptn.tex* where *n* is
+The image files for particle effects are named `fxptN.tex` where *N* is
 an integer. MM2 has files from index one to index 16, excluding index
-15. It is uncertain if more files can be added, but, at least 15 might
+15. It is uncertain if more files can be added, but at least 15 might
 be re-instated for new particle textures. See
-[asBirthRule](asBirthRule "wikilink") for more details.
+[asBirthRule](asBirthRule.md) for more details.
 
 *Billboarding* an object or an image means that it is always rotated so
 that it faces the camera regardless of the actual orientation of the
