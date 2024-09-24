@@ -60,7 +60,7 @@ index *n*, *n + 1*, *n + 2*, *n + 3* and so on.
 
 In a pseudo-C style structure, the texture attributes look like this:
 
-```
+```c
 struct TextureReference
 {
     bit    lastAttribute;
@@ -73,8 +73,7 @@ struct TextureReference
 
 ### Triangle fans
 
-![0x30-0x37_Triangle_fan.jpg](0x30-0x37_Triangle_fan.jpg
-"0x30-0x37_Triangle_fan.jpg") To create ground surfaces triangle fans
+![0x30-0x37_Triangle_fan.jpg](images/0x30-0x37_Triangle_fan.jpg) To create ground surfaces triangle fans
 are usually used. These are constructed by a list of vertices
 surrounding a pivot vertex in a counter-clockwise order. Often the
 triangle fan is degenerated to a convex polygon. This means that the
@@ -87,7 +86,7 @@ following uword. Of course, there are no actual coordinates listed in
 the attribute, instead each uword in the data is an index in the vertex
 list of the PSDL file.
 
-```
+```c
 struct TriangleFan
 {
     bit                    lastAttribute;
@@ -99,7 +98,7 @@ struct TriangleFan
 }
 ```
 
-```
+```c
 struct TriangleFan
 {
     bit                 lastAttribute;
@@ -117,15 +116,14 @@ describes them.
 
 ### Roads without sidewalks
 
-![0x10-0x17_Rectangle_strip.jpg](0x10-0x17_Rectangle_strip.jpg
-"0x10-0x17_Rectangle_strip.jpg") For walkways and narrow alleys without
+![0x10-0x17_Rectangle_strip.jpg](images/0x10-0x17_Rectangle_strip.jpg) For walkways and narrow alleys without
 sidewalks the attributes with id 0x02 is used. The data in the attribute
 defines the road by pairs of vertices - cross sections of the road. The
 sub type defines the number of cross sections the road consists of. If
 the sub type is zero, the following ushort gives the number of cross
 sections.
 
-```
+```c
 struct Walkway
 {
     bit                   lastAttribute;
@@ -137,7 +135,7 @@ struct Walkway
 }
 ```
 
-```
+```c
 struct Walkway
 {
     bit                 lastAttribute;
@@ -150,8 +148,7 @@ struct Walkway
 
 ### Roads with sidewalks
 
-![0x00-0x07_Road_strip.jpg](0x00-0x07_Road_strip.jpg
-"0x00-0x07_Road_strip.jpg") The most common roads in an MM2 city are the
+![0x00-0x07_Road_strip.jpg](images/0x00-0x07_Road_strip.jpg) The most common roads in an MM2 city are the
 ones with sidewalks on both sides. These are easily defined using
 cross-sections of the road. Attribute 0x00 defines cross sections of the
 particular road segment.
@@ -171,7 +168,7 @@ rendered using texture *n* + 1 and texture *n* + 2 is the texture used
 across the entire road in the lowest *LOD*, or level of detail, of the
 road segment.
 
-```
+```c
 struct Road
 {
     bit                   lastAttribute;
@@ -183,7 +180,7 @@ struct Road
 }
 ```
 
-```
+```c
 struct Road
 {
     bit                 lastAttribute;
@@ -196,8 +193,7 @@ struct Road
 
 ### Divided roads
 
-![0x08_Divided_road.jpg](0x08_Divided_road.jpg
-"0x08_Divided_road.jpg") The vertices in each cross section are
+![0x08_Divided_road.jpg](images/0x08_Divided_road.jpg) The vertices in each cross section are
 organized like this: First comes the vertex defining the position of the
 outer edge of the left sidewalk, then follows the outer edge of the left
 road surface, the inner edge of the left road surface, the inner edge of
@@ -222,26 +218,21 @@ In addition to the flags parameter there is also an extra texture
 reference and a value parameter. These are used differently depending on
 the divider type.
 
-  - 0 - Invisible: No divider is rendered, but the bound is there.
+  - 0 – Invisible: No divider is rendered, but the bound is there.
   
-  - 1 - Flat: A flat divider is in the same height as the
+  - 1 – Flat: A flat divider is in the same height as the
     road surfaces, the *value* parameter defines how many times the
-    texture is repeated across the divider.
+    texture is repeated across the divider. <br /> ![DividerFlatGFX.jpg](images/DividerFlatGFX.jpg)
+
+  - 2 – Elevated: The *value* parameter specifies the height
+    of the divider and the width of the side strips. <br /> ![DividerElevatedGFX.jpg](images/DividerElevatedGFX.jpg)
     
-   ![DividerFlatGFX.jpg](DividerFlatGFX.jpg "DividerFlatGFX.jpg")
-    
-   - 2 - Elevated: The *value* parameter specifies the height
-    of the divider and the width of the side strips.
-    
-   ![DividerElevatedGFX.jpg](DividerElevatedGFX.jpg "DividerElevatedGFX.jpg")
-    
-   - 3 - Wedged: A wedged divider is always one metre high.
+  - 3 – Wedged: A wedged divider is always one metre high.
     The top of the sloping sides are always 0.5 metres towards the
     center of the road from the given divider vertices. The remaining
     width between the two divider vertices are filled by a flat top
-    strip.
+    strip. <br /> ![DividerWedgeGFX.jpg](images/DividerWedgeGFX.jpg)
     
-   ![DividerWedgeGFX.jpg](DividerWedgeGFX.jpg "DividerWedgeGFX.jpg")
 
 #### Flags
 
@@ -265,7 +256,7 @@ a wedge divider. Texture *n* + 2 is used for the center strip of an
 elevated or wedge divider. Finally, texture *n* + 3 is used to close the
 dividers.
 
-```
+```c
 struct DividedRoad
 {
     bit                   lastAttribute;
@@ -281,7 +272,7 @@ struct DividedRoad
 }
 ```
 
-```
+```c
 struct DividedRoad
 {
     bit                 lastAttribute;
@@ -303,8 +294,9 @@ geometry.
 
 ### Sidewalk strip
 
-![Roadcrossing_Sidewalk.jpg](Roadcrossing_Sidewalk.jpg
-"Roadcrossing_Sidewalk.jpg") A sidewalk strip defines a piece of a
+![Roadcrossing_Sidewalk.jpg](images/Roadcrossing_Sidewalk.jpg)
+
+A sidewalk strip defines a piece of a
 sidewalk. The sidewalk is defined by a set of inner and outer vertex
 indices, repeating a vertex index can be used to *bend* a sidewalk
 around a point as shown in the image. The actual geometry will have an
@@ -313,8 +305,9 @@ section.
 
 #### Road end piece
 
-![0x0A_Sidewalk_Strip.jpg](0x0A_Sidewalk_Strip.jpg
-"0x0A_Sidewalk_Strip.jpg") A special end piece for roads can be made
+![0x0A_Sidewalk_Strip.jpg](images/0x0A_Sidewalk_Strip.jpg)
+
+A special end piece for roads can be made
 using sidewalk strip attribute *0xa*. Normally this attribute makes a
 regular sidewalk strip with 4 vertices. However, if the first two vertex
 references are both set to *0* or *1*, this attribute makes up a single
@@ -392,7 +385,7 @@ struct RoadTriangleFan
 
 Most of the buildings in a city is constructed using PSDL attributes.
 These are well suited for low detailed buildings. For higher detail
-levels, add [INST](INST "wikilink")-placed PKGs as parts of or complete
+levels, add [INST](INST)-placed PKGs as parts of or complete
 buildings.
 
 ### Roof triangle fans
@@ -403,7 +396,7 @@ differently. Another difference is that they include a reference to a
 height value that will replace the y-component of each of the referenced
 points.
 
-```
+```c
 struct RoofTriangleFan
 {
     bit                   lastAttribute;
@@ -416,7 +409,7 @@ struct RoofTriangleFan
 }
 ```
 
-```
+```c
 struct RoofTriangleFan
 {
     bit                 lastAttribute;
@@ -442,7 +435,7 @@ bound is always perfectly horizontal, but this is also the case for the
 facades and the roofs. The bottom edge of the facade bound can, however,
 be slanted. This acommodates the possibility of a sliver on the facade.
 
-```
+```c
 struct FacadeBound
 {
     bit    lastAttribute;
@@ -459,8 +452,7 @@ struct FacadeBound
 
 ### Slivers
 
-![Sliver_texture_mapping.jpg](Sliver_texture_mapping.jpg
-"Sliver_texture_mapping.jpg")
+![Sliver_texture_mapping.jpg](images/Sliver_texture_mapping.jpg)
 
 The ground floor of a building is often partially below street level. To
 simulate this, there is an attribute that accepts different y-components
@@ -476,7 +468,7 @@ attribute is a bit tricky. The texture is uniformly scaled but in the
 horizontal direction it is shrinked (or stretched) to fit the building.
 The calculations of the U and V coordinates are shown in the image.
 
-```
+```c
 struct Sliver
 {
     bit    lastAttribute;
@@ -496,7 +488,7 @@ A regular facade is modelled as a rectangle that has a texture map
 repeated a number of times over its surface. The facade rectangle is
 always aligned with the world Y axis.
 
-```
+```c
 struct Facade
 {
     bit    lastAttribute;
@@ -519,7 +511,7 @@ MM2; subtype 3 being used for roads only and subtype 0 for all sorts of
 rooms (mainly intersections).
 
 Tunnels and railings use 6 textures, defined in the preceding [texture
-attribute](#Texture_references "wikilink"):
+attribute](#Texture_references):
 
 1.  Left wall
 2.  Right wall
@@ -540,7 +532,7 @@ London.
 
 MM2 will render walls along any of the roads following this attribute.
 
-```
+```c
 struct RoadTunnel
 {
     bit    lastAttribute;
@@ -590,7 +582,7 @@ point *0* and *1*, and so on. Often the array is padded with trailing
 zeros to match the attribute's size, which is defined in the first
 *ushort*.
 
-```
+```c
 struct TunnelJunction
 {
     bit    lastAttribute;
