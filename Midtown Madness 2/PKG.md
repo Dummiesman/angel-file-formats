@@ -276,7 +276,7 @@ PKGXRef
 
 Some PKGs have several geometry files that are defined in a local
 coordinate system. These are recognised by the fact that they have an
-additional, external file in the filesystem. Look [here](MTX "wikilink")
+additional, external file in the filesystem. Look [here](MTX.md)
 for more information.
 
 ## Boundary files
