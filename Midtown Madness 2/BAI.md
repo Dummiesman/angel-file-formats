@@ -15,12 +15,12 @@ traffic.
 
 ### Roads
 
-![Route.jpg](Route.jpg "Route.jpg") The first section defines all the
+![Route.jpg](images/Route.jpg) The first section defines all the
 routes that pedestrians and ambient traffic can travel along. The
 routes, or roads, are defined by listing the [PSDL](PSDL.md)
 rooms they pass through as well as several control curves defining
 lanes for pedestrians, cars, trams and trains.
-![Route-oneway.jpg](Route-oneway.jpg "Route-oneway.jpg")
+![Route-oneway.jpg](images/Route-oneway.jpg)
 
 ### Intersections
 
