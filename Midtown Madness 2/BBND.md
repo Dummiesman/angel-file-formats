@@ -1,6 +1,6 @@
 BBND is a binary version of the [ASCII-based](BND.md "wikilink") format.
 
-```
+```C
 struct BBND
 {
   char version; // == 1
