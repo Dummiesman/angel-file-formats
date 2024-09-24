@@ -1,6 +1,6 @@
 ## Hello and welcome to "MM2kiwi"
 
-![MM2.jpg](MM2.jpg "MM2.jpg") MM2kiwi is a site that aspires to fulfill
+![MM2.jpg](images/MM2.jpg) MM2kiwi is a site that aspires to fulfill
 all your needs regarding making add-ons to Midtown Madness 2. If you are
 hungry for information about the inner workings of the MM2 file formats,
 look no further. Our database is constantly growing and new discoveries
