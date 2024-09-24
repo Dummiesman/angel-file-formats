@@ -38,7 +38,7 @@ INSTComponentHeader
 }
 
 INSTCoordinateComponent
-{`
+{
     INSTComponentHeader header; // The type field has the top bit cleared
     Vector      xAxis;
     Vector      yAxis;
