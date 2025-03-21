@@ -44,7 +44,10 @@ struct aiRail
 aiRail rails[numRails]; // from info tag
 ```
 
+## Tag 0x4104 : Traffic Light
 ## Tag 0x410A : Traffic Light
+Unknown what the difference between these types is
+
 ```cpp
 Matrix34 matrix; (row major matrix made of of 4 Vector3 components)
 short unkDataLen;
