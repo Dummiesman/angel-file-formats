@@ -49,7 +49,7 @@ aiRail rails[numRails]; // from info tag
 Matrix34 matrix; (row major matrix made of of 4 Vector3 components)
 short unkDataLen;
 char unkData[unkDataLen];
-short unkDataLen2;
-short unkData2[unkDataLen2];
-char unkChar;
+short numNodes;
+short nodeIndices[numNodes];
+char flags;
 ```
