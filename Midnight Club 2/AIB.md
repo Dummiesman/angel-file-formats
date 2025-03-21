@@ -2,7 +2,7 @@
 AIB files are tagged stream files (described elsewhere in this repo)
 
 ## Tag 0x4100 : General Information
-```c
+```cpp
 short numNodes;
 short numRails;
 short numRoads;
@@ -11,7 +11,7 @@ short numControls;
 ```
 
 ## Tag 0x4101 : Node
-```c
+```cpp
 Vector3 position;
 Vector3 direction;
 short railId; // unsure
@@ -20,13 +20,13 @@ char flags; // unsure
 ```
   
 ## Tag 0x4105 : Control
-```c
+```cpp
 short numTrafficLights;
 short trafficLightIndices[numTrafficLights];
 ```
 
 ## Tag 0x4109 : Rails
-```c
+```cpp
 struct aiRail
 {
   short nodeIdA;
@@ -39,13 +39,13 @@ struct aiRail
   short word_0e;
   short roadId; // unsure
   short flags; // unsure
-}
+};
 
 aiRail rails[numRails]; // from info tag
 ```
 
 ## Tag 0x410A : Traffic Light
-```c
+```cpp
 Matrix34 matrix; (row major matrix made of of 4 Vector3 components)
 short unkDataLen;
 char unkData[unkDataLen];
