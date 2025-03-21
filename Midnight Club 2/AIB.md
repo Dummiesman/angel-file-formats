@@ -1,5 +1,6 @@
 # AIB (AI)
 AIB files are tagged stream files (described elsewhere in this repo)
+
 For each of the individual data strucutres (e.g. node) keep a running counter. Ex. first node tag = first node in memory, etc.
 
 ## Tag 0x4100 : General Information
