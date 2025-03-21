@@ -27,6 +27,15 @@ short numTrafficLights;
 short trafficLightIndices[numTrafficLights];
 ```
 
+## Tag 0x4106 : Router Data
+This tag has multiple sub tags. It's unknown what this does yet.
+
+## Tag 0x4108 : File Metadata
+```cpp
+char name[32];
+long unknown;
+```
+
 ## Tag 0x4109 : Rails
 ```cpp
 struct aiRail
