@@ -1,1 +1,55 @@
 # AIB (AI)
+AIB files are tagged stream files (described elsewhere in this repo)
+
+## Tag 0x4100 : General Information
+```c
+short numNodes;
+short numRails;
+short numRoads;
+short numTrafficLights;
+short numControls;
+```
+
+## Tag 0x4101 : Node
+```c
+Vector3 position;
+Vector3 direction;
+short railId; // unsure
+char nRailOut; // unsure
+char flags; // unsure
+```
+  
+## Tag 0x4105 : Control
+```c
+short numTrafficLights;
+short trafficLightIndices[numTrafficLights];
+```
+
+## Tag 0x4109 : Rails
+```c
+struct aiRail
+{
+  short nodeIdA;
+  short nodeIdB;
+  short word_04;
+  short word_06;
+  short word_08;
+  short word_0a;
+  short word_0c;
+  short word_0e;
+  short roadId; // unsure
+  short flags; // unsure
+}
+
+aiRail rails[numRails]; // from info tag
+```
+
+## Tag 0x410A : Traffic Light
+```c
+Matrix34 matrix; (row major matrix made of of 4 Vector3 components)
+short unkDataLen;
+char unkData[unkDataLen];
+short unkDataLen2;
+short unkData2[unkDataLen2];
+char unkChar;
+```
