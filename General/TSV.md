@@ -1,4 +1,4 @@
-# Tagged Stream (TSV)
+# Tagged Stream
 Used throughout various AGE games
 
 ```cpp
