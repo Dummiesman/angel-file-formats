@@ -16,15 +16,26 @@ table:
     palette, a list of blue, green, red and alpha colour components.
     After the palette comes the pixels - a matrix of references to the
     palette list.
+  - type = 6 (A1R5G5B5): This is a non-palette based image. The image data
+    is a set of 16 bit values, with 1 bit alpha, 5 bit red, 5 bit green, 5 bit blue
+  - type = 8 (I8): This is a non-palette, greyscale image. The image data
+    is 8 bits per pixel, representing a greyscale value.
+  - type = 9 (A4I4): This is a non-palette based image. The image data
+    is represented as 8 bits per pixel, with the lower 4 bits being a
+    greyscale value, and the upper 4 bits being an alpha value
+  - type = 10 (A8I8): This is a non-palette based image. The image data
+    is represented as 16 bits per pixel, in two byte pairs, with the
+    first byte being 8 bits alpha, and the second byte being 8 bits greyscale
+  - type = 8 (A8): This is a non-palette image representing an alpha channel.
   - type = 14 (PA8): This is a palette based image. First comes a colour
     palette, a list of blue, green, red and alpha colour components.
     After the palette comes the pixels - a matrix of references to the
     palette list.
-  - type = 15 (P4_MC): This is a palette based image. First comes a
+  - type = 15 (P4): This is a palette based image. First comes a
     16-colour palette, a list of blue, green, red and alpha colour
     components. After the palette comes the pixels - a matrix of
     references to the palette list - each reference is a nibble.
-  - type = 16 (PA4_MC): This is a palette based image. First comes a
+  - type = 16 (PA4): This is a palette based image. First comes a
     16-colour palette, a list of blue, green, red and alpha colour
     components. After the palette comes the pixels - a matrix of
     references to the palette list - each reference is a nibble.
@@ -33,18 +44,32 @@ table:
   - type = 18 (RGBA8888): This is a non-palette based image. The image
     data is a matrix of colour values on the form red, green, blue and
     alpha.
+  - type = 22 (DXT1): This is a non-pallete based image using BC1 block compression.
+  - type = 24 (DXT3): This is a non-pallete based image using BC3 block compression.
+  - type = 26 (DXT5): This is a non-pallete based image using BC5 block compression.
 
-Types with a suffix *_MC* has only been seen in Midnight Club. At the
-moment the difference between type 1 (P8) and type 14 (PA8) is unknown.
-The difference between P4_MC and PA4_MC is also unknown.
+Types DXT1,DXT2,DXT3,A8I8,A4I4,I8 only become available in Midnight Club 2.
+They are not available in Midnight Club: Street Racing or Midtown Madness 2.
+
+The difference between PA and P formats is PA contains an alpha channel, where in P formats it's ignored.
 
 In all types, the actual pixel matrix is organized as one horizontal
 line after each other, starting with the top row. Each row goes from
 left to right.
 
-The *bits* parameter is probably not only bits. It has been found that a
-value of 0x04 makes the alpha channel affect reflection rather than
-transparency.
+The *bits* parameter isn't completely known, and has some game specific values. But here's what is known:
+```
+enum TextureFlags
+{
+    ClampU = 0x01,
+    CloudShadowsLow = 0x04, // Appears to be specific to Midtown Madness 2
+    CloudShadowsHigh = 0x02, // Appears to be specific to Midtown Madness 2
+    ClampV = 0x10000,
+    Transparent=0x20000,
+    Filtering=0x40000,
+    MipFiltering = 0x80000
+}
+```
 
 The format can be described in a pseudo C-style manner:
 
@@ -138,7 +163,7 @@ struct Pixel4
 ```
 
 ```
-struct TEXFile_P4_MC    // Type 15
+struct TEXFile_P4    // Type 15
 {
     struct Header                                 header;
     struct ColourMapEntryA8[16]                   palette;
@@ -147,7 +172,7 @@ struct TEXFile_P4_MC    // Type 15
 ```
 
 ```
-struct TEXFile_PA4_MC    // Type 16
+struct TEXFile_PA4    // Type 16
 {
     struct Header                                 header;
     struct ColourMapEntryA8[16]                   palette;
