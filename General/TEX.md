@@ -48,7 +48,7 @@ table:
   - type = 24 (DXT3): This is a non-pallete based image using BC3 block compression.
   - type = 26 (DXT5): This is a non-pallete based image using BC5 block compression.
 
-Types DXT1,DXT2,DXT3,A8I8,A4I4,I8 only become available in Midnight Club 2.
+Types DXT1,DXT2,DXT3,A8I8,A4I4,I8 only become available starting with Midnight Club 2.
 They are not available in Midnight Club: Street Racing or Midtown Madness 2.
 
 The difference between PA and P formats is PA contains an alpha channel, where in P formats it's ignored.
