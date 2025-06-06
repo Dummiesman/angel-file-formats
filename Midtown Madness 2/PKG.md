@@ -8,7 +8,7 @@ of the surfaces.
 
 The PKG format used in the game Midnight Club differs slightly from this
 format. A description of the differences can be found
-[here](PKGMC "wikilink").
+[here](<../Midnight Club/PKG.md>).
 
 ## Format description
 
