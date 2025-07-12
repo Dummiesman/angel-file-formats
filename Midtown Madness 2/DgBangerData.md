@@ -65,7 +65,17 @@ file, in that case the values from *default.dgBangerData* is used.
 | YRadius       | float             | Bounding cylinder/sphere radius                                                                                                                                                   |
 | ColliderId    | int               | Index in a list of sound effects the object makes when collided with. The list is defined in the file [/aud/cardata/player/default_impacts.csv](default_impacts.csv "wikilink"). |
 | CollisionPrim | int               | Defines the type of object used for collision detection, 0=boundary file, 1=bounding box, 2=cylinder with circular base, height is Y-component of *Size* and 3=sphere             |
-| CollisionType | int               | Unknown, values 4, 16 and 48 are used in MM2 files                                                                                                                                |
+| CollisionType | int               | See below                                                                                                                                                                        |
+
+### CollisionType
+CollisionType is a bitfield with the following values.
+| Flag | Description |
+| ---- | ----------- |
+|2     | No collision, only update the physics entity. Mutually exclusive with other collision flags.
+|4     | Collide terrain only. Mutually exclusive with other collision flags.
+|16    | Collide instances and terrain. Mutually exclusive with other collision flags.
+|32   | AI don't consider this an obstacle
+|64    | Collide instances and terrain, high priority (no despawn). Mutually exclusive with other collision flags.
 
 ### Tags of the dgBangerData block
 
