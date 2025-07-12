@@ -74,7 +74,7 @@ CollisionType is a bitfield with the following values.
 |2     | No collision, only update the physics entity. Mutually exclusive with other collision flags.
 |4     | Collide terrain only. Mutually exclusive with other collision flags.
 |16    | Collide instances and terrain. Mutually exclusive with other collision flags.
-|32   | AI don't consider this an obstacle
+|32   | Collide with wheels (i.e. you can drive on the banger instance), also not considered an obstacle to AI anymore
 |64    | Collide instances and terrain, high priority (no despawn). Mutually exclusive with other collision flags.
 
 ### Tags of the dgBangerData block
