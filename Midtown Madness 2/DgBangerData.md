@@ -61,21 +61,28 @@ file, in that case the values from *default.dgBangerData* is used.
 | NumParts      | int               | Number of breakable parts in the object                                                                                                                                           |
 | BirthRule     | block             | Particle effect for collision, see below                                                                                                                                          |
 | TexNumber     | int               | Number of the particle texture map, see below                                                                                                                                     |
-| BillFlags     | int               | Flags, 512=Unlit, others unknwon at this time                                                     |
+| BillFlags     | int               | FSee below                                                    |
 | YRadius       | float             | Bounding cylinder/sphere radius                                                                                                                                                   |
 | ColliderId    | int               | Index in a list of sound effects the object makes when collided with. The list is defined in the file [/aud/cardata/player/default_impacts.csv](default_impacts.csv "wikilink"). |
 | CollisionPrim | int               | Defines the type of object used for collision detection, 0=boundary file, 1=bounding box, 2=cylinder with circular base, height is Y-component of *Size* and 3=sphere             |
 | CollisionType | int               | See below                                                                                                                                                                        |
 
+### BillFlags
+BillFlags is a field used for generic flags. Despite its name, it cannot be used for billboarding.
+| Flag | Description |
+| ---- | ----------- |
+|256   | This is a glass instance. |
+|512     | This is a tree instance. (Unlit) |
+
 ### CollisionType
 CollisionType is a bitfield with the following values.
 | Flag | Description |
 | ---- | ----------- |
-|2     | No collision, only update the physics entity. Mutually exclusive with other collision flags.
-|4     | Collide terrain only. Mutually exclusive with other collision flags.
-|16    | Collide instances and terrain. Mutually exclusive with other collision flags.
-|32   | Collide with wheels (i.e. you can drive on the banger instance), also not considered an obstacle to AI anymore
-|64    | Collide instances and terrain, high priority (no despawn). Mutually exclusive with other collision flags.
+|2     | No collision, only update the physics entity. Mutually exclusive with other collision flags. |
+|4     | Collide terrain only. Mutually exclusive with other collision flags. |
+|16    | Collide instances and terrain. Mutually exclusive with other collision flags. |
+|32   | Collide with wheels (i.e. you can drive on the banger instance), also not considered an obstacle to AI anymore |
+|64    | Collide instances and terrain, high priority (no despawn). Mutually exclusive with other collision flags. |
 
 ### Tags of the dgBangerData block
 
