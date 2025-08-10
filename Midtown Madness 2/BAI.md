@@ -62,9 +62,9 @@ struct Road
     unsigned short flags;           // See below
     unsigned short nRooms;          // Number of room references
     unsigned short rooms[nRooms];   // References to the SDL
+    float          halfWidth;        // The width of half of the road
     float          baseSpeed;        // The base speed for vehicles travelling on this road (base because vehicles get additional speed on freeways)
                                      // Note that Midtown Madness 2 at least will override this completely with the values defined in the race aimap file
-    float          halfWidth;        // The width of half of the road
 
     RoadData       right;           // Data for right side
     RoadData       left;            // Data for left side
