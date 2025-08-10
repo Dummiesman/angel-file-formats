@@ -1,3 +1,8 @@
+## Introduction
+
+The _sup BAI file defines shortcuts, and has an ever so slightly different RoadEnd format
+
+## Format description
 ```C
 struct BAI
 {
