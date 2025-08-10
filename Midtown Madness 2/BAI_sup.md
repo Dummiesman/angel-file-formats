@@ -73,10 +73,11 @@ struct ShortcutRoadData
 ```
 
 ```C
+// Which one of these fields is intersectionRoadIndex is disputed.
 struct ShortcutRoadEnd
 {
     unsigned long  intersectionID;        // Reference to Intersection[].id
-    unsigned short unknown0;              // Always 0xcdcd
+    unsigned short unknown0;              
     unsigned short  vehicleRule;           // See below
     unsigned long  intersectionRoadIndex; // Index in the intersections road list or 0xcdcdcdcd
     unsigned long unknown1;               // Totally unknown
