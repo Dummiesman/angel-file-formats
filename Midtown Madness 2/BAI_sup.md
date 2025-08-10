@@ -1,6 +1,7 @@
 ## Introduction
 
-The _sup BAI file defines shortcuts, and has an ever so slightly different RoadEnd format
+The _sup BAI file defines shortcuts. It's supplementary and therefore only contains the shortcut data it needs to.
+It's very close to the BAI format, but there's some slight difference in RoadEnd
 
 ## Format description
 ```C
