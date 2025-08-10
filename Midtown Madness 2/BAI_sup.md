@@ -41,17 +41,6 @@ struct Shortcut
 ```
 
 ```C
-struct Intersection
-{
-    unsigned short id;
-    unsigned short room;          // Reference to the SDL, (index + 1)
-    Vertex         center;        // Center point of intersection
-    unsigned short nRoads;        // Number of connected roads
-    unsigned long  roads[nRoads]; // Counterclockwise ordered references to roads connected to this intersection
-};
-```
-
-```C
 struct ShortcutRoadData
 {
     unsigned short nLanes;        // Number of lanes
