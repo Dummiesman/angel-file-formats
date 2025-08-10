@@ -51,23 +51,6 @@ struct Intersection
 ```
 
 ```C
-struct Culling
-{
-    unsigned long  nRooms;         // Number of rooms in the SDL + 1
-    CullingList    cull0[nRooms];  // Large AI bubbles
-    CullingList    cull1[nRooms];  // Small AI bubbles
-};
-```
-
-```C
-struct CullingList
-{
-    unsigned short nRoads;
-    unsigned short roads[nRoads];  // References to roads
-}
-```
-
-```C
 struct ShortcutRoadData
 {
     unsigned short nLanes;        // Number of lanes
