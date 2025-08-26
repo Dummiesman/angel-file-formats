@@ -48,10 +48,10 @@ file, in that case the values from *default.dgBangerData* is used.
 | Tag           | Format            | Description                                                                                                                                                                       |
 | ------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | AudioId       | int               | Index in a list of sound effects the object makes all the time?                                                                                                                   |
-| Size          | float float float | Width, height and depth of the bounding box around the object                                                                                                                     |
-| CG            | float float float | Center of gravity, rotation takes place around this point                                                                                                                         |
+| Size          | float float float | Width, height and depth of the bounding box around the origin of the object                                                                                                       |
+| CG            | float float float | Vector between the origin of the model and the position of the object in the world. Used to position the object.[^CG]                                                             |
 | NumGlows      | int               | Number of image light glow effects listed below using the GlowOffset tag. These effects are only active at night                                                                  |
-| GlowOffset    | float float float | Local offset of glows, repeated 1 .. NumGlows                                                                                                                                  |
+| GlowOffset    | float float float | Local offset of glows, repeated 1 .. NumGlows                                                                                                                                     |
 | Mass          | float             | Mass of the object in kilograms, closely related to the objects weight                                                                                                            |
 | Elasticity    | float             | Controls the *bounciness* of the object                                                                                                                                           |
 | Friction      | float             | friction coefficient, determines how much force is required to slide along the surface of the object                                                                              |
@@ -83,6 +83,8 @@ CollisionType is a bitfield with the following values.
 |16    | Collide instances and terrain. Mutually exclusive with other collision flags. |
 |32   | Collide with wheels (i.e. you can drive on the banger instance), also not considered an obstacle to AI anymore |
 |64    | Collide instances and terrain, high priority (no despawn). Mutually exclusive with other collision flags. |
+
+[^CG]: The first and the last argument are mostly used for positioning breakables. Normal (undamaged) props usually use the second argument only, chiefly as half the height of the object. Contrary to earlier beliefs, this tag has nothing to do with the center of gravity or rotation.
 
 ### Tags of the dgBangerData block
 
