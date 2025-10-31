@@ -614,8 +614,8 @@ struct TunnelJunction
     ushort unknown          // unknown value present if subtype != 2
     
     short  ceilingPerimeterFanOriginVertexIndex         // the index in the perimeter list from where to start the ceiling fan
-    long    wallVisibilityBits                           // bits controlling each part of the wall
-    long    wallDirBitsA                                 // Controls some direction of the first part of the wall segments
-    long    wallDirBitsB                                 // Controls some direction of the second part of the wall segments
+    long    wallVisibilityBits                           // 32 bits controlling the visibility of a walls around perimeter edges
+    long    wallDirBitsA                                 // Controls whether the first segment of thie wall on this edge is inverted
+    long    wallDirBitsB                                 // Controls whether the second segment of thie wall on this edge is inverted
 }
 ```
