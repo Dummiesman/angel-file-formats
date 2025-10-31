@@ -590,7 +590,7 @@ struct TunnelJunction
     bit[3] subtype = 0x00;
     bit[8] padding = 0x00;
     
-    ushort nSize;           // number of shorts
+    ushort nSize;           // number of shorts, must be 0x10 for junctions
     
     bit    leftSide         // enables left side
     bit    rightSide        // enables right side
@@ -613,9 +613,9 @@ struct TunnelJunction
     ushort height           // height in meters * 256
     ushort unknown          // unknown value present if subtype != 2
     
-    short  unknown3         // controls something about the visibility of the ceiling (more bits?)
-    
-    ushort[nSize - 4] enabledWalls // Each bit is used to indicate the visibility of a wall
-                                   // (see description above)
+    short  ceilingPerimeterFanOriginVertexIndex         // the index in the perimeter list from where to start the ceiling fan
+    int    wallVisibilityBits                           // bits controlling each part of the wall
+    int    wallDirBitsA                                 // Controls some direction of the first part of the wall segments
+    int    wallDirBitsB                                 // Controls some direction of the second part of the wall segments
 }
 ```
