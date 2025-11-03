@@ -590,7 +590,7 @@ struct TunnelJunction
     bit[3] subtype = 0x00;
     bit[8] padding = 0x00;
     
-    ushort nSize;           // number of shorts, must be 0x10 for junctions
+    ushort nSize;           // number of shorts, must be 0xA for junctions
     
     bit    leftSide         // enables left side
     bit    rightSide        // enables right side
