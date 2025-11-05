@@ -308,7 +308,7 @@ section.
 ![0x0A_Sidewalk_Strip.jpg](images/0x0A_Sidewalk_Strip.jpg)
 
 A special end piece for roads can be made
-using sidewalk strip attribute *0xa*. Normally this attribute makes a
+using sidewalk strip attribute **. Normally this attribute makes a
 regular sidewalk strip with 4 vertices. However, if the first two vertex
 references are both set to *0* or *1*, this attribute makes up a single
 triangle begin piece or end piece respectively. Vertex references 3 and
@@ -545,8 +545,8 @@ struct RoadTunnel
     bit    rightSide        // enables right side
     bit    style            // railing = 0 or wall = 1
     bit    flatCeiling      // ignored if curved ceiling is used
-    bit    closedStartLeft  // closes the start of the left wall (or makes the first row of curved ceilings flat)
-    bit    closedEndLeft    // closes the end of the left wall (or makes the last row of curved ceilings flat)
+    bit    closedStartLeft  // closes the start of the left wall (or makes the first row of curved ceilings/walls flat)
+    bit    closedEndLeft    // closes the end of the left wall (or makes the last row of curved ceilings/walls flat)
     bit    closedStartRight // ...
     bit    closedEndRight
     
