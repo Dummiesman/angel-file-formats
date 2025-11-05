@@ -557,7 +557,7 @@ struct RoadTunnel
     bit    offsetEndRight
     bit    curvedSides      // subdivided sides
     bit    culled           // disables outer faces if railings are used
-    bit    unknown          // probably unused
+    bit    unknown          // unused
 
     ushort height           // height in meters * 256
     ushort unknown          // unknown value present if subtype != 2
