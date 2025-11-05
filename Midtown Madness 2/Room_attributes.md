@@ -529,8 +529,9 @@ This type of tunnel attribute applies to roads. The subtype indicates
 the size of the attribute (number of shorts). The only common version of
 this attribute is 0x4b (subtype *3*), as used in San Francisco and
 London.
-
+  
 MM2 will render walls along any of the roads following this attribute.
+The attribute must precede either a texture attribute followed by a road attribute, or a road attribute directly.
 
 ```c
 struct RoadTunnel
