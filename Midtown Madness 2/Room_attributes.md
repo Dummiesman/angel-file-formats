@@ -544,8 +544,8 @@ struct RoadTunnel
     bit    rightSide        // enables right side
     bit    style            // railing = 0 or wall = 1
     bit    flatCeiling      // ignored if curved ceiling is used
-    bit    closedStartLeft  // closes the start of the left wall
-    bit    closedEndLeft    // closes the end of the left wall
+    bit    closedStartLeft  // closes the start of the left wall (or makes the first row of curved ceilings flat)
+    bit    closedEndLeft    // closes the end of the left wall (or makes the last row of curved ceilings flat)
     bit    closedStartRight // ...
     bit    closedEndRight
     
