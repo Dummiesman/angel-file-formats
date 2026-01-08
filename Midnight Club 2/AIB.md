@@ -20,7 +20,29 @@ short railId; // unsure
 char nRailOut; // unsure
 char flags; // unsure
 ```
-  
+
+## Tag 0x4103 : Road (Type 1)
+## Tag 0x4107 : Road (Type 2)
+```cpp
+unsigned short hoodNameLength;
+char hoodName[hoodNameLength+1];
+char type; // guess
+Vector3 center;
+float radius;
+short numRails;
+short railIds[numRails];
+short numNeighbors;
+short neighborRoadIds[numNeighbors];
+
+if(tag4107)
+{
+  short numUnkThings;
+  char unkData[numUnkThings * 16];
+
+  short numUnkThings2;
+  char unkData2[numUnkThings2 * 16];
+}
+
 ## Tag 0x4105 : Control
 ```cpp
 short numTrafficLights;
@@ -55,8 +77,8 @@ struct aiRail
 aiRail rails[numRails]; // from info tag
 ```
 
-## Tag 0x4104 : Traffic Light
-## Tag 0x410A : Traffic Light
+## Tag 0x4104 : Traffic Light (Type 1)
+## Tag 0x410A : Traffic Light (Type 2)
 Unknown what the difference between these types is
 
 ```cpp
