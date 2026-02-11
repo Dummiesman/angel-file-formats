@@ -64,6 +64,7 @@ enum TextureFlags
     ClampU = 0x01, // Works for all AGE games
     CloudShadowsLow = 0x04, // Appears to be specific to Midtown Madness 2
     CloudShadowsHigh = 0x02, // Appears to be specific to Midtown Madness 2
+    DoubleSided = 0x20, // Only found in Midnight Club 2 at the moment, unknown if it works in other AGE games
     ClampV = 0x10000, // Works for all AGE games
     Filtering=0x40000, // Works starting in Midnight Club 2
     MipFiltering = 0x80000 // Works starting in Midnight Club 2
