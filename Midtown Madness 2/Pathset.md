@@ -48,7 +48,7 @@ struct Path
 
 struct Point
 {
-    ulong unknown2;
+    ulong misc; // upper 8 bits - unknown, lower 24 bits - room id
     float x;
     float y;
     float z;
