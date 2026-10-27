@@ -120,7 +120,7 @@ struct RoadData
 
     float  distance[nLanes+nSidewalks]                    // Outer edge distance
     float  lanesDistances[nLanes+nSidewalks][nSections];  // Distances between lane vertices
-    char miscData[40];                                    // An interesting set of data (todo:document)
+    float  railBounds[10];                                // [2k] = inner lateral boundary of rail k, [2k+1] = its outer boundary.
     Vertex lLanesVertices[nLanes+nSidewalks][nSections];  // Vertices for driving lane splines
     Vertex tramVertices[nTrams][nSections];               // Vertices for tram rail splines
     Vertex trainVertices[nTrains][nSections];             // Vertices for train rail splines
