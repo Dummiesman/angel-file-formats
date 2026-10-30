@@ -560,7 +560,9 @@ struct RoadTunnel
     bit    unknown          // unused
 
     ushort height           // height in meters * 256
-    ushort unknown          // unknown value present if subtype != 2
+    ushort collisionHeight  // collision height * 256. The game does min(3m, collisionHeight in meters).
+                            // this is also used for room bounds so it's important that it's set, without it the game calculates
+                            // tunnel rooms as being flat
 }
 ```
 
@@ -612,7 +614,9 @@ struct TunnelJunction
     bit    unknown          // probably unused
     
     ushort height           // height in meters * 256
-    ushort unknown          // unknown value present if subtype != 2
+    ushort collisionHeight  // collision height * 256. The game does min(3m, collisionHeight in meters).
+                            // this is also used for room bounds so it's important that it's set, without it the game calculates
+                            // tunnel rooms as being flat
     
     short  ceilingPerimeterFanOriginVertexIndex         // the index in the perimeter list from where to start the ceiling fan
     long    wallVisibilityBits                           // 32 bits controlling the visibility of a walls around perimeter edges
