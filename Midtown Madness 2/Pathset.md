@@ -38,7 +38,7 @@ struct Path
 {
     char[32] name;    // Name of object or texture, padded with 0x00
     ulong nPoints;    // Number of points in this path
-    ulong unknown1;
+    ulong currentVert; // Currently selected vertex, used in development tools
     struct Point points[nPoints];
     uchar type;       // See definition below
     uchar spacing;    // Spacing of props placed between the points in
