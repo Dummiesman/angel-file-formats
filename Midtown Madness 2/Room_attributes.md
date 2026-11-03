@@ -568,8 +568,7 @@ struct RoadTunnel
 
 In the files of MM2 Beta 1, the PSDL file "banktest.psdl" was found,
 which uses the attribute 0x4a (subtype *2*). As its subtype indicates,
-this attribute is 2 bytes shorter than the version described above. This
-might explain why there is a second (unused?) height value.
+this attribute is 2 bytes shorter than the version described above. .
 
 ### Junction tunnel/railing
 
