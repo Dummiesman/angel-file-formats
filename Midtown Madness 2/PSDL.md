@@ -58,18 +58,17 @@ for each room. The bits define the type of the room. Some flags are
 still unknown, but this is the current interpretation:
 
   - 0: Unknown, this bit is never used.
-    1: Subterranean, this bit is set for rooms that are located below
+  -  1: Subterranean, this bit is set for rooms that are located below
     ground level (e.g. subways). The echo effect will appear on this
     room.
-    2: Plain, standard, ground level room.
-    3: Road, all rooms with roads should have this bit set.
-    4: Intersection, all rooms that serves as intersections for ambient
+  -  2: Plain, standard, ground level room.
+  -  3: Road, all rooms with roads should have this bit set.
+  -  4: Intersection, all rooms that serves as intersections for ambient
     traffic and pedestrians should have this bit set.
-    5: Unknown, something about the bound.
-    6: Warp Room, used on anything above or below ground level.
+  -  5: Triangle bound. Makes roads use triangle bounds instead of quads.
+  -  6: Warp Room, used on anything above or below ground level.
     (effect?)
-    7: INST, all rooms containing INST objects should have this bit
-    set.
+  -  7: Solid. Used in rooms with landmarks or buildings.
 
 After the list of room types comes yet another list with one value for
 each room. This list is a list of indices into the file
