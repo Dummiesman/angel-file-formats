@@ -191,10 +191,7 @@ struct PerimeterPoint
     ushort room;   // index in room list + 1
 }
 
-struct AIRoad // TODO: This description is wrong, it reflects a previous
-                 // misconception about a connection to the BAI file.
-                 // It adds up, but some of the parameter names are
-                 // wrong.
+struct AIRoad                  
 {
     ulong                    flags;
     byte                     laneCounts[2];   // lanes per direction ([1] = 0 for one-way)
