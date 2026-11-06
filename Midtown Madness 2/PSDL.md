@@ -138,12 +138,13 @@ struct PSDL
     ulong                 targetSize = 2;  // Unknown
     ulong                 nVertices;       // Number of vertices
     Vertex[nVertices]     vertices;
-    ulong                 nFloats;        // Number of floats
+    ulong                 nFloats;         // Number of floats
     float[nFloats]        floats;
     ulong                 nTextures;       // Number of textures + 1
     String[nTextures - 1] textures;
-    ulong                 nRooms;         // Number of rooms
-    ulong                 nFirstRoadRoom;        // Retail PSDL are stored as [standard, roads, intersections], this is the ID of the first road room
+    ulong                 nRooms;          // Number of rooms
+    ulong                 nFirstRoadRoom;  // Retail PSDL are stored as [standard, roads, intersections]
+                                           // this is the ID of the first road room
     Room[nRooms - 1]      rooms;
     char[nRooms]          roomFlags;       // List of bytes with room type flags
     char[nRooms]          propRule;        // Identifies what prop rule to use for each
