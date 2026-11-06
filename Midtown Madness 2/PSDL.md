@@ -42,6 +42,10 @@ Zero means that no room connects at this vertex and n means that room
 same vertex, the vertex is repeated in the perimeter list for each of
 the connecting rooms.
 
+Rooms in retail cities are stored in the order of [standard, roads, intersections]
+However this order is not required by shipped games that load the format
+It's perfectly valid to write 0 for firstRoadRoom and export in an arbitrary order
+
 After the perimeter comes a list of the various geometric primitives, or
 room attributes, that defines the interior of the room. Each of these
 attributes has a different structure. All known attributes are described
