@@ -90,12 +90,38 @@ engine, it appears as if this section is extended with a large number of
 bounding spheres. Perhaps one for each city room. This information is
 not yet confirmed.
 
-### Props
+### AI Roads
 
-TODO: This section was previously interpreted as road definitions with a
-strong connection to BAI. But Driver has proven that this section in
-fact defines paths for roadside props. The description will be updated
-accordingly.
+An AI road is presumably what Angel Studios would have generated the BAI from.
+Each AI road specifies all basic info about how AI on a road should work.
+This section is also used by the game to spawn roadside props, but only because it's a guaranteed record of all roads.
+
+AIRoad flags:
+
+  -  0 (0x00000001): One-way (likely). Set on almost all roads that only have lanes in one direction. Not the BAI "Flat" flag.
+  -  1 (0x00000002): Blocked. No vehicles on this road (set on every alley in london).
+  -  2 (0x00000004): Ped blocked. No pedestrians on this road.
+      * Blocked + Ped blocked = BAI ambientTypes 3 (nobody), Blocked only = 1 (pedestrians only), Ped blocked only = 2 (vehicles only).
+  -  3 (0x00000008): Divided road. Same as BAI Road flag 1.
+  -  4 (0x00000010): Alley. Same as BAI Road flag 2.
+  -  5 (0x00000020): Freeway. Same as BAI Road flag 4.
+  -  6 (0x00000040): Has sidewalks. Pedestrians walk on the sidewalk vertices of the road attribute. When clear, pedestrians walk along the
+     edges of the road surface itself. Set on every road with sidewalks and every divided road, never on alleys.
+  -  8 (0x00000100): Cable car. The first lane in each direction is a cable car track instead of a lane
+     (laneCounts 2/2 becomes 1 lane + 1 tram per side in the BAI).
+  -  9 (0x00000200): Subway. All lanes are subway lanes.
+  - 10-11 (0x00000C00): Intersection control at the start of the road (see below).
+  - 16-17 (0x00030000): Intersection control at the end of the road (see below).
+  - 22 (0x00400000): Pedestrians walk in the road. The inner pedestrian path is moved 95% of the way towards the road centre.
+  - 23 (0x00800000): Moves the traffic light at the start of the road 2 m further along the stop line (traffic light ends only).
+  - 24 (0x01000000): Same, for the end of the road.
+  - 
+Control flags (controlData, one byte per road end, [0] = start, [1] = end):
+
+  - 0 (0x01): Dual traffic light (sp_traflitdual_f instead of sp_traflitsingle_f). Never set on roads with one lane per direction,
+    usually set with two or more.
+  - 7 (0x80): Unknown. Doesn't correlate with the intersection control, lane counts or the traffic light offset flags.
+
 
 ### Structure
 
@@ -126,9 +152,9 @@ struct PSDL
     Vertex                center;          // Center of bounding sphere
     float                 radius;          // Radius of bounding sphere
 
-    // room based props section:
-    ulong                 nPaths;          // Number of prop path definitions
-    RoomPath[nPaths]      paths;
+    // AI roads:
+    ulong                 nRoads;
+    AIRoad[nPaths]        roads;
 }
 
 struct Vertex
@@ -160,29 +186,23 @@ struct PerimeterPoint
     ushort room;   // index in room list + 1
 }
 
-struct RoomPath // TODO: This description is wrong, it reflects a previous
+struct AIRoad // TODO: This description is wrong, it reflects a previous
                  // misconception about a connection to the BAI file.
                  // It adds up, but some of the parameter names are
                  // wrong.
 {
-    ushort                   unknown4;
-    ushort                   unknown5;
-    ubyte                    nFLanes;         // Number of lanes in the forward
-                                              // direction?
-    ubyte                    nBLanes;         // Number of lanes in the
-                                              // backward direction?
-    float[nFLanes + nBLanes] density;         // Traffic density on each lane?
-    ushort                   unknown6;        // Looks like some flags in a
-                                              // bit-field.
+    ulong                    flags;
+    byte                     laneCounts[2];   // lanes per direction ([1] = 0 for one-way)
+    float[nFLanes + nBLanes] lanePositions;   // each lane's position across the road surface, 0..1
+    byte                     controlData[2];  // determines the 
     ushort[4]                startCrossroads; // Vertices defining the road
                                               // part of a crossing at the
                                               // start of the road.
     ushort[4]                endCrossroads;   // Vertices defining the road
                                               // part of a crossing at the end
                                               // of the road.
-    uchar                    nRoadBlocks;     // Number of blocks that make up
+    uchar                    nRoadRooms;      // Number of blocks that make up
                                               // this road.
-    ushort[nRoadBlocks]      roadBlocks;      // Block ID + 1 of each block
-                                              // that makes up this road.
+    ushort[nRoadBlocks]      roadRooms;       // room IDs of roads
 }
 ```
